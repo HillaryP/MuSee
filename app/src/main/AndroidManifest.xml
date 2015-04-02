@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.uw.prathh.musee" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MenuOptions"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_menu_options"
+            android:parentActivityName=".FullscreenActivity"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.FullscreenActivity" />
+        </activity>
+        <activity
+            android:name=".camera.CameraActivity"
+            android:label="@string/title_activity_camera" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:parentActivityName=".camera.CameraActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".camera.CameraActivity" />
+        </activity>
+        <activity
+            android:name=".info.AccessibilityActivity"
+            android:label="@string/title_activity_accessibility"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".info.MapActivity"
+            android:label="@string/title_activity_map"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".donate.DonateActivity"
+            android:label="@string/title_activity_donate"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".feedback.FeedbackActivity"
+            android:label="@string/title_activity_feedback"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".donate.DonateMoneySelect"
+            android:label="@string/title_activity_donate_money_select"
+            android:parentActivityName=".donate.DonateActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.donate.DonateActivity" />
+        </activity>
+        <activity
+            android:name=".donate.DonateConfirmAmount"
+            android:label="@string/title_activity_donate_confirm_amount" >
+        </activity>
+        <activity
+            android:name=".donate.DonateThankYou"
+            android:label="@string/title_activity_donate_thank_you" >
+        </activity>
+        <activity
+            android:name=".feedback.FeedbackThankYou"
+            android:label="@string/title_activity_feedback_thank_you" >
+        </activity>
+        <activity
+            android:name=".events.EventActivity"
+            android:label="@string/title_activity_event"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".events.EventDetail"
+            android:label="@string/title_activity_event_detail"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".exhibits.ExhibitActivity"
+            android:label="@string/title_activity_exhibit"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".exhibits.ExhibitDetail"
+            android:label="@string/title_activity_exhibit_detail" >
+        </activity>
+        <activity
+            android:name=".info.FavoritesActivity"
+            android:label="@string/title_activity_favorites"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.MenuActivity" />
+        </activity>
+    </application>
+
+</manifest>
