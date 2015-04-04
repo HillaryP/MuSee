@@ -8,27 +8,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MenuOptions"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_menu_options"
-            android:parentActivityName=".FullscreenActivity"
-            android:theme="@style/FullscreenTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.uw.prathh.musee.FullscreenActivity" />
-        </activity>
-        <activity
             android:name=".camera.CameraActivity"
             android:label="@string/title_activity_camera" >
             <intent-filter>
