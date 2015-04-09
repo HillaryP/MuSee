@@ -4,5 +4,59 @@
     android:orientation="vertical"
     tools:context="edu.uw.prathh.musee.donate.DonateActivity">
     <include layout="@layout/header_layout"
-        android:id="@+id/header" />
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="152dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:id="@+id/donate_motivate"
+        android:text="We strive to make the most optimal experience for our patrons. We appreciate any amount you wish to donate!"
+        android:textSize="20sp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="284dp"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:clickable="false"
+        android:id="@+id/money_grid"
+        android:layout_gravity="center"
+        android:padding="10dp">
+        <TextView
+            android:text="$10"
+            android:id="@+id/ten"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:onClick="optionSelected"/>
+        <TextView
+            android:text="$20"
+            android:id="@+id/twenty"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:onClick="optionSelected"/>
+        <TextView
+            android:text="$50"
+            android:id="@+id/fifty"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:onClick="optionSelected"/>
+        <TextView
+            android:text="$100"
+            android:id="@+id/hundred"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:onClick="optionSelected"/>
+        <TextView
+            android:text="Other"
+            android:id="@+id/other"
+            android:layout_columnSpan="2"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:onClick="optionSelected"/>
+    </GridLayout>
 </LinearLayout>

@@ -19,6 +19,7 @@ import edu.uw.prathh.musee.donate.DonateActivity;
 
 
 public class MenuActivity extends ActionBarActivity {
+    public static final String VENMO_URL = "https://api.venmo.com/v1/oauth/authorize?client_id=2519&scope=make_payments%20access_profile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MenuActivity extends ActionBarActivity {
             public void onClick(View v) {
                 if (((MuSeeApp) getApplication()).getAccessToken() == null) {
                     Intent getData = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("https://api.venmo.com/v1/oauth/authorize?client_id=2519&scope=make_payments%20access_profile"));
+                            Uri.parse(VENMO_URL));
                     startActivity(getData);
                 } else {
                     Intent goToPay = new Intent(MenuActivity.this, DonateActivity.class);

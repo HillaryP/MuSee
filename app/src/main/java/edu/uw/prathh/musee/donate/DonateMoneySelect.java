@@ -1,9 +1,13 @@
 package edu.uw.prathh.musee.donate;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.uw.prathh.musee.R;
@@ -13,8 +17,20 @@ public class DonateMoneySelect extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donate_money_select);TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
-        title.setText("$ _ _._ _");
+        setContentView(R.layout.activity_donate_money_select);
+        final EditText title = (EditText) findViewById(R.id.amount);
+        title.setHint("$ _ _._ _");
+        final Button confirm = (Button) findViewById(R.id.next);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putDouble("amt", Double.parseDouble(title.getText().toString()));
+                Intent confirmed = new Intent(DonateMoneySelect.this, DonateConfirmAmount.class);
+                confirmed.putExtras(extras);
+                startActivity(confirmed);
+            }
+        });
     }
 
 

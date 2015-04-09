@@ -43,7 +43,6 @@ public class DonateActivity extends Activity {
         setContentView(R.layout.activity_donate);
         TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
         title.setText("Donate");
-        //addListenerOnButton();
         if (((MuSeeApp)getApplication()).getAccessToken() == null) {
             Uri data = getIntent().getData();
             String token = data.getQueryParameter("access_token");
@@ -52,6 +51,35 @@ public class DonateActivity extends Activity {
         } else {
             String token = ((MuSeeApp)getApplication()).getAccessToken();
             new InfoRequestTask().execute(ME_URL + token);
+        }
+    }
+
+    public void optionSelected(View v) {
+        double amt = 0.0;
+        switch (v.getId()) {
+            case R.id.ten:
+                amt = 10.0;
+                break;
+            case R.id.twenty:
+                amt = 20.0;
+                break;
+            case R.id.fifty:
+                amt = 50.0;
+                break;
+            case R.id.hundred:
+                amt = 100.0;
+                break;
+            default:
+                Intent moneySelect = new Intent(this, DonateMoneySelect.class);
+                startActivity(moneySelect);
+                break;
+        }
+        if (v.getId() != R.id.other) {
+            Bundle b = new Bundle();
+            b.putDouble("amt", amt);
+            Intent moneySelect = new Intent(this, DonateConfirmAmount.class);
+            moneySelect.putExtras(b);
+            startActivity(moneySelect);
         }
     }
 
@@ -90,6 +118,8 @@ public class DonateActivity extends Activity {
                         String jsonString = EntityUtils.toString(response.getEntity());
                         JSONObject json = new JSONObject(jsonString);
                         return "Welcome to MuSee, " + json.getJSONObject("data").getJSONObject("user").getString("first_name");
+                    } else {
+                        return "Response status: " + statusLine.getReasonPhrase();
                     }
                 } catch (Exception e) {
                     Log.w("Payment", "Something went wrong while getting url response: " + e);

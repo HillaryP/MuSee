@@ -4,5 +4,20 @@
     android:orientation="vertical"
     tools:context="edu.uw.prathh.musee.donate.DonateConfirmAmount">
     <include layout="@layout/header_layout"
-        android:id="@+id/header" />
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.49"
+        android:id="@+id/amt"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Donation"
+        android:id="@+id/confirm" />
 </LinearLayout>
