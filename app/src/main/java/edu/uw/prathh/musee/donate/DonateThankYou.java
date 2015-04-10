@@ -1,20 +1,19 @@
 package edu.uw.prathh.musee.donate;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import edu.uw.prathh.musee.R;
 
-public class DonateThankYou extends ActionBarActivity {
+public class DonateThankYou extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate_thank_you);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -54,6 +54,13 @@ public class DonateActivity extends Activity {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        String token = ((MuSeeApp)getApplication()).getAccessToken();
+        new InfoRequestTask().execute(ME_URL + token);
+    }
+
     public void optionSelected(View v) {
         double amt = 0.0;
         switch (v.getId()) {
