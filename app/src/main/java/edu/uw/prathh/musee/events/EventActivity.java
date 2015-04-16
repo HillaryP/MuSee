@@ -1,13 +1,28 @@
 package edu.uw.prathh.musee.events;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,12 +52,7 @@ public class EventActivity extends ActionBarActivity {
     }
 
     private void createEventList() {
-        eventList = new ArrayList<>();
-        eventList.add("Fun super awesome event");
-        eventList.add("Fun super awesome event 2");
-        eventList.add("Fun super awesome event 3");
-        eventList.add("Fun super awesome event 4");
-        eventList.add("Fun super awesome event 5");
+        //new InfoRequestTask().execute("http://www.burkemuseum.org/events"); TODO - FIX THIS
     }
 
     private void createCollection() {
@@ -86,5 +96,32 @@ public class EventActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class InfoRequestTask extends AsyncTask<String, Void, List<String>> {
+        @Override
+        protected List<String> doInBackground(String... uri) {
+            List<String> list = new ArrayList<>();
+            if (uri[0] != null) {
+                try {
+                    Document doc = Jsoup.connect(uri[0]).get();
+                    Elements events = doc.getElementsByClass(".bk_event_listing");
+                    for (Element event : events) {
+                        list.add("Fun super awesome event");
+                    }
+                    return list;
+                } catch (Exception e) {
+                    Log.e("EventActivity", "Accessing the document did not work: " + e);
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<String> result) {
+            super.onPostExecute(result);
+            eventList = result;
+            Log.i("EventActivity", result.toString());
+        }
     }
 }
