@@ -47,7 +47,7 @@ public class EventActivity extends ActionBarActivity {
 
     private void createCollection() {
         List<String> description = new ArrayList<>();
-        description.add("Sunday, April 12, 2011\nBurke Second Floor\n6:00 - 9:00pm\nOMG description!");
+        description.add("2011-04-12\nBurke Second Floor\n6:00 - 9:00pm\nOMG description!");
         collection = new LinkedHashMap<>();
         for (String event : eventList) {
             collection.put(event, description);

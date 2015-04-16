@@ -13,16 +13,20 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-    public static final String[] months = {"January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"};
     private Activity context;
     private Map<String, List<String>> eventCollections;
     private List<String> events;
@@ -50,8 +54,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.single_event, null);
         }
         String[] items = text.split("\n");
+        Calendar eventDate = convertToDate(items[0]);
+        String dateString = eventDate.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+                + ", " + eventDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+                + " " + eventDate.get(Calendar.DAY_OF_MONTH);
         TextView date = (TextView) convertView.findViewById(R.id.date);
-        date.setText(items[0] + "\n" + items[1] + "\n" + items[2]);
+        date.setText(dateString + "\n" + items[1] + "\n" + items[2]);
         TextView item = (TextView) convertView.findViewById(R.id.description);
         item.setText(items[3]);
         Button button = (Button) convertView.findViewById(R.id.button);
@@ -66,18 +74,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private void addEvent(View v, int groupPosition) {
         String[] items = ((String) getChild(groupPosition, 0)).split("\n");
-
-        String[] date = items[0].split(" ");
         String[] time = items[2].split(" ");
+        Calendar startDate = convertToDate(items[0]);
 
         Calendar beginTime = Calendar.getInstance();
-        beginTime.set(Integer.parseInt(date[3]), Arrays.asList(months).indexOf(date[1]),
-                Integer.parseInt(date[2].substring(0, date[2].length() - 1)),
+        beginTime.set(startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DAY_OF_MONTH),
                 Integer.parseInt(time[0].split(":")[0]),
                 Integer.parseInt(time[0].split(":")[1]));
         Calendar endTime = Calendar.getInstance();
-        endTime.set(Integer.parseInt(date[3]), Arrays.asList(months).indexOf(date[1]),
-                Integer.parseInt(date[2].substring(0, date[2].length() - 1)),
+        endTime.set(startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DAY_OF_MONTH),
                 Integer.parseInt(time[2].split(":")[0]),
                 Integer.parseInt(time[2].split(":")[1].substring(0, time[2].split(":")[1].length() - 2)));
 
@@ -91,6 +96,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, items[1])
                 .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_FREE);
         context.startActivity(intent);
+    }
+
+    private Calendar convertToDate(String s) {
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = formatter.parse(s);
+            Calendar startDate = new GregorianCalendar();
+            startDate.setTime(date);
+            return startDate;
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     public int getChildrenCount(int groupPosition) {
