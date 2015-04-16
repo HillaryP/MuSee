@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="130dp"
+    android:background="#3F4752"
     android:padding="16dp">
     <ImageButton
         android:layout_width="wrap_content"
@@ -13,5 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/title"
+        android:textStyle="bold"
+        android:textColor="#FF5237"
+        android:textSize="30dp"
         android:text="Dummy Title"/>
+
 </LinearLayout>
