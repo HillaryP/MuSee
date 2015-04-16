@@ -34,13 +34,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView ( final int groupPosition, final int childPosition,
             boolean isLastChild, View convertView, ViewGroup parent ) {
-        final String event = (String) getChild(groupPosition, childPosition);
+        final String text = (String) getChild(groupPosition, childPosition);
         LayoutInflater inflater = context.getLayoutInflater();
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.single_event, null);
         }
+        String[] items = text.split("\n");
+        TextView date = (TextView) convertView.findViewById(R.id.date);
+        date.setText(items[0] + "\n" + items[1] + "\n" + items[2]);
         TextView item = (TextView) convertView.findViewById(R.id.description);
-        item.setText(event);
+        item.setText(items[3]);
         return convertView;
     }
 
