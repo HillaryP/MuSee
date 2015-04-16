@@ -10,16 +10,19 @@
         android:layout_weight="0.5"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="152dp"
-        android:gravity="center_vertical|center_horizontal"
+        android:gravity="left"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/donate_motivate"
         android:text="We strive to make the most optimal experience for our patrons. We appreciate any amount you wish to donate!"
-        android:textSize="20sp"
+        android:textSize="18dp"
+        android:textColor="#1A2638"
         android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        android:paddingTop="30dp"/>
     <GridLayout
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="284dp"
         android:columnCount="2"
         android:rowCount="3"
