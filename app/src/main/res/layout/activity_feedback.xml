@@ -3,6 +3,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="edu.uw.prathh.musee.feedback.FeedbackActivity">
-    <include layout="@layout/header_layout"
-        android:id="@+id/header" />
+
+   <!--<include layout="@layout/header_layout"
+       />/ android:id="@+id/header"
+        //android:layout_row="0"
+       // android:layout_column="0" /> -->
+
+    <RadioGroup
+        android:id="@+id/radioFeedbackGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+
+    <RadioButton
+        android:id="@+id/radio_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_1"
+        android:checked="true"
+        android:layout_gravity="center_horizontal" />
+    <RadioButton
+        android:id="@+id/radio_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_2"
+        android:layout_gravity="center_horizontal" />
+    <RadioButton
+        android:id="@+id/radio_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_3"
+        android:layout_gravity="center_horizontal" />
+    <RadioButton
+        android:id="@+id/radio_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_4"
+        android:layout_gravity="center_horizontal" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_feedback"/>
+
 </LinearLayout>

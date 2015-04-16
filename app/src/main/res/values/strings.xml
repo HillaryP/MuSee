@@ -23,4 +23,10 @@
     <string name="title_activity_exhibit">ExhibitActivity</string>
     <string name="title_activity_exhibit_detail">ExhibitDetail</string>
     <string name="title_activity_favorites">FavoritesActivity</string>
+
+    <string name="radio_1">Fabulous</string>
+    <string name="radio_2">Amazing</string>
+    <string name="radio_3">Seriously Cool</string>
+    <string name="radio_4">Totes Awesome</string>
+    <string name="btn_feedback">Submit</string>
 </resources>
