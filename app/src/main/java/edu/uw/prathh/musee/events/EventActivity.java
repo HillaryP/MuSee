@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +47,7 @@ public class EventActivity extends ActionBarActivity {
 
     private void createCollection() {
         List<String> description = new ArrayList<>();
-        description.add("Sunday, April 12th, 2011\nBurke Second Floor\n6 - 9pm\nOMG description!");
+        description.add("Sunday, April 12, 2011\nBurke Second Floor\n6:00 - 9:00pm\nOMG description!");
         collection = new LinkedHashMap<>();
         for (String event : eventList) {
             collection.put(event, description);
