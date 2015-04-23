@@ -52,7 +52,8 @@ public class EventActivity extends ActionBarActivity {
     }
 
     private void createEventList() {
-        //new InfoRequestTask().execute("http://www.burkemuseum.org/events"); TODO - FIX THIS
+        this.eventList = new ArrayList<>();
+        new InfoRequestTask().execute("http://www.burkemuseum.org/events"); //TODO - FIX THIS
     }
 
     private void createCollection() {
@@ -105,7 +106,7 @@ public class EventActivity extends ActionBarActivity {
             if (uri[0] != null) {
                 try {
                     Document doc = Jsoup.connect(uri[0]).get();
-                    Elements events = doc.getElementsByClass(".bk_event_listing");
+                    Elements events = doc.select(".bk_event_listing");
                     for (Element event : events) {
                         list.add("Fun super awesome event");
                     }
