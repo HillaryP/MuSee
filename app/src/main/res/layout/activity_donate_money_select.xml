@@ -3,11 +3,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="edu.uw.prathh.musee.donate.DonateMoneySelect">
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/menu_button"
-        android:src="@drawable/menu"/>
+
+    <include layout="@layout/header_layout"
+        android:id="@+id/header"
+        />
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/menu_button"-->
+        <!--android:src="@drawable/menu"/>-->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

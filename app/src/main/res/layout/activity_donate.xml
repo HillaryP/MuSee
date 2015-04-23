@@ -5,9 +5,7 @@
     tools:context="edu.uw.prathh.musee.donate.DonateActivity">
     <include layout="@layout/header_layout"
         android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"/>
+/>
 
     <TextView
         android:layout_width="250dp"
