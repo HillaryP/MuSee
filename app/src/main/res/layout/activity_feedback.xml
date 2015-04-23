@@ -4,10 +4,9 @@
     android:orientation="vertical"
     tools:context="edu.uw.prathh.musee.feedback.FeedbackActivity">
 
-   <!--<include layout="@layout/header_layout"
-       />/ android:id="@+id/header"
-        //android:layout_row="0"
-       // android:layout_column="0" /> -->
+    <include layout="@layout/header_layout"
+        android:id="@+id/header"
+/>
 
     <RadioGroup
         android:id="@+id/radioFeedbackGroup"
