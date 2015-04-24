@@ -1,8 +1,8 @@
 package edu.uw.prathh.musee.donate;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -29,7 +29,7 @@ import java.util.List;
 import edu.uw.prathh.musee.MuSeeApp;
 import edu.uw.prathh.musee.R;
 
-public class DonateConfirmAmount extends ActionBarActivity {
+public class DonateConfirmAmount extends Activity {
     public static final String URL_TEST = "https://sandbox-api.venmo.com/v1/payments";
     //public static final String URL = "https://api.venmo.com/v1/payments";
 

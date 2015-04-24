@@ -1,6 +1,6 @@
 package edu.uw.prathh.musee.feedback;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +15,7 @@ import android.view.View.OnClickListener;
 import edu.uw.prathh.musee.R;
 
 
-public class FeedbackActivity extends ActionBarActivity {
+public class FeedbackActivity extends Activity {
 
     private RadioGroup radioFeedbackGroup;
     private RadioButton radioFeedbackButton;

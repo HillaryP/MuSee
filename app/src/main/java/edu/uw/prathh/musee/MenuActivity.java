@@ -1,8 +1,8 @@
 package edu.uw.prathh.musee;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +18,7 @@ import edu.uw.prathh.musee.camera.CameraActivity;
 import edu.uw.prathh.musee.donate.DonateActivity;
 
 
-public class MenuActivity extends ActionBarActivity {
+public class MenuActivity extends Activity {
     public static final String VENMO_URL = "https://api.venmo.com/v1/oauth/authorize?client_id=2519&scope=make_payments%20access_profile";
 
     @Override

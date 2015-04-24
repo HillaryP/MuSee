@@ -1,6 +1,6 @@
 package edu.uw.prathh.musee.exhibits;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import edu.uw.prathh.musee.R;
 
-public class ExhibitActivity extends ActionBarActivity {
+public class ExhibitActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

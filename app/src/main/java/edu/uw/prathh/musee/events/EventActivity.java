@@ -1,7 +1,7 @@
 package edu.uw.prathh.musee.events;
 
+import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -33,7 +33,7 @@ import java.util.Map;
 import edu.uw.prathh.musee.ExpandableListAdapter;
 import edu.uw.prathh.musee.R;
 
-public class EventActivity extends ActionBarActivity {
+public class EventActivity extends Activity {
     private List<String> eventList;
     private Map<String, List<String>> collection;
     private ExpandableListView expandableListView;

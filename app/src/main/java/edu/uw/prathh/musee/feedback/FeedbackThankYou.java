@@ -1,13 +1,13 @@
 package edu.uw.prathh.musee.feedback;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import edu.uw.prathh.musee.R;
 
-public class FeedbackThankYou extends ActionBarActivity {
+public class FeedbackThankYou extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

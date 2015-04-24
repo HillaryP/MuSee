@@ -1,8 +1,8 @@
 package edu.uw.prathh.musee.donate;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import edu.uw.prathh.musee.R;
 
-public class DonateMoneySelect extends ActionBarActivity {
+public class DonateMoneySelect extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
