@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.TabHost;
+import android.app.TabActivity;
+
+
 
 import edu.uw.prathh.musee.R;
 
 
-public class AccessibilityActivity extends ActionBarActivity {
+public class AccessibilityActivity extends TabActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,27 @@ public class AccessibilityActivity extends ActionBarActivity {
         setContentView(R.layout.activity_accessibility);
         TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
         title.setText("Accessibility");
+
+        // Working on adding tabs *NOT DONE*
+//        TabHost tabHost = getTabHost();
+//        tabHost.setCurrentTabByTag("First");
+//
+//        TabSpec firstTab = tabHost.newTabSpec("First");
+//        firstTab.setIndicator("firstTab",getResources().getDrawable(R.drawable.ic_action_first)); //drawable 1
+//        firstTab.setContent(R.id.first_content);    //View
+//        tabHost.addTab(firstTab);
+//
+//        TabSpec secondTab = tabHost.newTabSpec("Second");
+//        secondTab.setIndicator("secondTab",getResources().getDrawable(R.drawable.ic_action_second)); //drawable 2
+//        secondTab.setContent(R.id.second_content);    //View
+//        tabHost.addTab(secondTab);
+//
+//        TabSpec thirdTab = tabHost.newTabSpec("Third");
+//        thirdTab.setIndicator("thirdTab",getResources().getDrawable(R.drawable.ic_action_third)); //drawable 3
+//        thirdTab.setContent(R.id.third_content);    //View
+//        tabHost.addTab(thirdTab);
+//
+//        tabHost.setCurrentTab(0);
     }
 
 

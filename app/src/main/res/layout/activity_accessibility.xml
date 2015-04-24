@@ -5,4 +5,5 @@
     tools:context="edu.uw.prathh.musee.info.AccessibilityActivity">
     <include layout="@layout/header_layout"
         android:id="@+id/header" />
+
 </LinearLayout>
