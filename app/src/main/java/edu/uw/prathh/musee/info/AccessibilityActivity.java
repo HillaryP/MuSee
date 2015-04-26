@@ -1,19 +1,21 @@
 package edu.uw.prathh.musee.info;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.TabHost;
-import android.app.TabActivity;
 
 
-
+import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
 
 
-public class AccessibilityActivity extends TabActivity {
+public class AccessibilityActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,26 +24,15 @@ public class AccessibilityActivity extends TabActivity {
         TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
         title.setText("Accessibility");
 
-        // Working on adding tabs *NOT DONE*
-//        TabHost tabHost = getTabHost();
-//        tabHost.setCurrentTabByTag("First");
-//
-//        TabSpec firstTab = tabHost.newTabSpec("First");
-//        firstTab.setIndicator("firstTab",getResources().getDrawable(R.drawable.ic_action_first)); //drawable 1
-//        firstTab.setContent(R.id.first_content);    //View
-//        tabHost.addTab(firstTab);
-//
-//        TabSpec secondTab = tabHost.newTabSpec("Second");
-//        secondTab.setIndicator("secondTab",getResources().getDrawable(R.drawable.ic_action_second)); //drawable 2
-//        secondTab.setContent(R.id.second_content);    //View
-//        tabHost.addTab(secondTab);
-//
-//        TabSpec thirdTab = tabHost.newTabSpec("Third");
-//        thirdTab.setIndicator("thirdTab",getResources().getDrawable(R.drawable.ic_action_third)); //drawable 3
-//        thirdTab.setContent(R.id.third_content);    //View
-//        tabHost.addTab(thirdTab);
-//
-//        tabHost.setCurrentTab(0);
+        ImageButton menuButton = (ImageButton) findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccessibilityActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

@@ -1,13 +1,16 @@
 package edu.uw.prathh.musee.events;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.uw.prathh.musee.ExpandableListAdapter;
+import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
 
 public class EventActivity extends Activity {
@@ -37,6 +41,15 @@ public class EventActivity extends Activity {
         title.setText("Events");
 
         new InfoRequestTask().execute("http://www.burkemuseum.org/events/");
+
+        ImageButton menuButton = (ImageButton) findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EventActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setList(List<String> result) {

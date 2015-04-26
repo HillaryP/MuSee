@@ -1,11 +1,15 @@
 package edu.uw.prathh.musee.info;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
 
 public class FavoritesActivity extends Activity {
@@ -16,6 +20,15 @@ public class FavoritesActivity extends Activity {
         setContentView(R.layout.activity_favorites);
         TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
         title.setText("Favorites");
+
+        ImageButton menuButton = (ImageButton) findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FavoritesActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
