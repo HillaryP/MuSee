@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import edu.uw.prathh.musee.R;
 
@@ -13,6 +14,8 @@ public class FeedbackThankYou extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback_thank_you);
+        TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
+        title.setText("Feedback");
     }
 
 
