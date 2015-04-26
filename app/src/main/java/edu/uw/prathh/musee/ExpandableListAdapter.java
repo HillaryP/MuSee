@@ -100,7 +100,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Calendar convertToDate(String s) {
         try {
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat formatter = new SimpleDateFormat("/yyyy/MM/dd");
             Date date = formatter.parse(s);
             Calendar startDate = new GregorianCalendar();
             startDate.setTime(date);

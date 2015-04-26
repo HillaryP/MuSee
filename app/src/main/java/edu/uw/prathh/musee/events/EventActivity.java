@@ -7,25 +7,18 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +27,6 @@ import edu.uw.prathh.musee.ExpandableListAdapter;
 import edu.uw.prathh.musee.R;
 
 public class EventActivity extends Activity {
-    private List<String> eventList;
-    private Map<String, List<String>> collection;
     private ExpandableListView expandableListView;
 
     @Override
@@ -44,25 +35,25 @@ public class EventActivity extends Activity {
         setContentView(R.layout.activity_event);
         TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
         title.setText("Events");
-        createEventList();
-        createCollection();
-        expandableListView = (ExpandableListView) findViewById(R.id.event_list);
-        final ExpandableListAdapter expandableListAdapter = new ExpandableListAdapter(this, eventList, collection);
-        expandableListView.setAdapter(expandableListAdapter);
+
+        new InfoRequestTask().execute("http://www.burkemuseum.org/events/");
     }
 
-    private void createEventList() {
-        this.eventList = new ArrayList<>();
-        new InfoRequestTask().execute("http://www.burkemuseum.org/events"); //TODO - FIX THIS
-    }
-
-    private void createCollection() {
-        List<String> description = new ArrayList<>();
-        description.add("2011-04-12\nBurke Second Floor\n6:00 - 9:00pm\nOMG description!");
-        collection = new LinkedHashMap<>();
-        for (String event : eventList) {
-            collection.put(event, description);
+    private void setList(List<String> result) {
+        List<String> names = new ArrayList<>();
+        Map<String, List<String>> collection = new LinkedHashMap<>();
+        for (String event : result) {
+            String[] nameAndRest = event.split(":::");
+            names.add(nameAndRest[0]);
+            List<String> description = new ArrayList<>();
+            description.add(nameAndRest[1]);
+            collection.put(nameAndRest[0], description);
         }
+
+        expandableListView = (ExpandableListView) findViewById(R.id.event_list);
+        final ExpandableListAdapter expandableListAdapter =
+                new ExpandableListAdapter(EventActivity.this, names, collection);
+        expandableListView.setAdapter(expandableListAdapter);
     }
 
     private void setGroupIndicatorToRight() {
@@ -75,6 +66,13 @@ public class EventActivity extends Activity {
     private int getDipsFromPixs(float pix) {
         final float scale = getResources().getDisplayMetrics().density;
         return (int) (pix * scale + 0.5f);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        new InfoRequestTask().execute("http://www.burkemuseum.org/events/");
     }
 
     @Override
@@ -102,15 +100,31 @@ public class EventActivity extends Activity {
     private class InfoRequestTask extends AsyncTask<String, Void, List<String>> {
         @Override
         protected List<String> doInBackground(String... uri) {
-            List<String> list = new ArrayList<>();
             if (uri[0] != null) {
                 try {
-                    Document doc = Jsoup.connect(uri[0]).get();
-                    Elements events = doc.select(".bk_event_listing");
-                    for (Element event : events) {
-                        list.add("Fun super awesome event");
+                    Connection.Response response = Jsoup.connect(uri[0])
+                            .userAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.46 Safari/536.5")
+                            .timeout(10*1000)
+                            .ignoreHttpErrors(true)
+                            .execute();
+                    int statusCode = response.statusCode();
+                    if (statusCode == 200) {
+                        Document doc = Jsoup.connect(uri[0]).timeout(10 * 1000).get();
+                        Elements events = doc.select(".bk_event_listing");
+                        List<String> eventNames = new ArrayList<>();
+                        for (Element e : events) {
+                            String info = e.getElementsByTag("h2").text() + ":::"
+                                    + e.getElementsByClass("bk_event_day").attr("name").toString() + "\n"
+                                    + e.getElementsByClass("bk_event_location").text() + "\n"
+                                    + "6:00 - 9:00pm\n" // TODO - MAKE THIS DYNAMIC
+                                    + e.getElementsByTag("p").text();
+                            eventNames.add(info);
+                        }
+                        Log.i("EventActivity", "In task Request: " + eventNames.toString());
+                        return eventNames;
+                    } else {
+                        Log.e("EventActivity", "Status code: " + response.statusMessage());
                     }
-                    return list;
                 } catch (Exception e) {
                     Log.e("EventActivity", "Accessing the document did not work: " + e);
                 }
@@ -119,10 +133,18 @@ public class EventActivity extends Activity {
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(EventActivity.this, "Fetching event data now!", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
         protected void onPostExecute(List<String> result) {
             super.onPostExecute(result);
-            eventList = result;
-            Log.i("EventActivity", result.toString());
+            Log.i("EventActivity", "In Task Response: " + result);
+            if (result != null) {
+                setList(result);
+            }
         }
     }
 }
