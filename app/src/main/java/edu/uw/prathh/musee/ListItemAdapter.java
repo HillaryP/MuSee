@@ -52,6 +52,7 @@ public class ListItemAdapter extends ArrayAdapter {
         labelView.setTextColor(Color.parseColor("#FF5337"));
         Typeface custom_font = Typeface.createFromAsset(context.getAssets(), "fonts/Avenir.ttc");
         labelView.setTypeface(custom_font);
+        labelView.setTextSize(24);
 
         final Intent goTo = getGoTo(label);
         labelView.setOnClickListener(new View.OnClickListener() {

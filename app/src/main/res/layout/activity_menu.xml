@@ -19,6 +19,9 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="20.0sp"
         android:id="@+id/list_view" />
     <Button
         android:layout_height="wrap_content"
