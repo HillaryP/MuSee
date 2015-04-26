@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ public class ListItemAdapter extends ArrayAdapter {
         String label = item.getLabel();
         TextView labelView = (TextView) convertView.findViewById(R.id.label);
         labelView.setText(label);
+        labelView.setTextColor(Color.parseColor("#FF5337"));
         final Intent goTo = getGoTo(label);
         labelView.setOnClickListener(new View.OnClickListener() {
             @Override
