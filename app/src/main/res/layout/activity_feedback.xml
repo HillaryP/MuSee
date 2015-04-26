@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.uw.prathh.musee.feedback.FeedbackActivity">
+    tools:context="edu.uw.prathh.musee.feedback.FeedbackActivity"
+    android:weightSum="1">
 
     <include layout="@layout/header_layout"
         android:id="@+id/header"
@@ -40,7 +41,23 @@
         android:layout_height="wrap_content"
         android:text="@string/radio_4"
         android:layout_gravity="center_horizontal" />
+
     </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Comments"
+        android:id="@+id/commentText" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_weight="0.13" />
 
     <Button
         android:id="@+id/btn_feedback"

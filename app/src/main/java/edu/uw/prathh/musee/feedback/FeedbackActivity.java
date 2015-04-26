@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -68,7 +69,11 @@ public class FeedbackActivity extends Activity {
                 RadioButton rb = (RadioButton) radioFeedbackGroup.findViewById(radioFeedbackGroup.getCheckedRadioButtonId());
                 Toast.makeText(FeedbackActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
                 String text = (String)rb.getText();
+
+                EditText comment = (EditText)findViewById(R.id.editText);
+                String value = comment.getText().toString();
                 Log.i("Feedback Activity", text);
+                Log.i("Feedback Activity", "Comments: " + value);
 
                 Intent intent = new Intent(FeedbackActivity.this, FeedbackThankYou.class);
                 startActivity(intent);
