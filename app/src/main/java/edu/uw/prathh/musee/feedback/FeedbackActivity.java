@@ -69,6 +69,9 @@ public class FeedbackActivity extends Activity {
                 Toast.makeText(FeedbackActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
                 String text = (String)rb.getText();
                 Log.i("Feedback Activity", text);
+
+                Intent intent = new Intent(FeedbackActivity.this, FeedbackThankYou.class);
+                startActivity(intent);
             }
         });
     }
