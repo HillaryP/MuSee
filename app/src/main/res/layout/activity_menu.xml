@@ -12,8 +12,9 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/back"
+        android:src="@drawable/backorangebutton"
         android:padding="6dp"
+        android:background="#3F4752"
         android:id="@+id/back"/>
     <ListView
         android:layout_width="match_parent"
