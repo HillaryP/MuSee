@@ -3,6 +3,7 @@ package edu.uw.prathh.musee.feedback;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.RadioButton;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
@@ -60,9 +62,13 @@ public class FeedbackActivity extends Activity {
             @Override
             public void onClick(View v) {
                 int selectedId = radioFeedbackGroup.getCheckedRadioButtonId();
-
                 radioFeedbackButton = (RadioButton) findViewById(selectedId);
+                Log.i("Feedback Activity", "Button has been clicked");
 
+                RadioButton rb = (RadioButton) radioFeedbackGroup.findViewById(radioFeedbackGroup.getCheckedRadioButtonId());
+                Toast.makeText(FeedbackActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
+                String text = (String)rb.getText();
+                Log.i("Feedback Activity", text);
             }
         });
     }
