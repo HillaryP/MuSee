@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.content.Context;
 import android.widget.Button;
@@ -29,6 +30,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.MuSeeApp;
 import edu.uw.prathh.musee.R;
 
@@ -52,6 +54,15 @@ public class DonateActivity extends Activity {
             String token = ((MuSeeApp)getApplication()).getAccessToken();
             new InfoRequestTask().execute(ME_URL + token);
         }
+
+        ImageButton menuButton = (ImageButton) findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DonateActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

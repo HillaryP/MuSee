@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
 
 public class DonateMoneySelect extends Activity {
@@ -29,6 +31,15 @@ public class DonateMoneySelect extends Activity {
                 Intent confirmed = new Intent(DonateMoneySelect.this, DonateConfirmAmount.class);
                 confirmed.putExtras(extras);
                 startActivity(confirmed);
+            }
+        });
+
+        ImageButton menuButton = (ImageButton) findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DonateMoneySelect.this, MenuActivity.class);
+                startActivity(intent);
             }
         });
     }

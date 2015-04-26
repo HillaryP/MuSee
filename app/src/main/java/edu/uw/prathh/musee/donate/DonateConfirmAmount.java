@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.MuSeeApp;
 import edu.uw.prathh.musee.R;
 
@@ -52,6 +54,15 @@ public class DonateConfirmAmount extends Activity {
                 b.putString("amount", "" + getIntent().getExtras().getDouble("amt"));
                 confirmed.putExtras(b);
                 startActivity(confirmed);
+            }
+        });
+
+        ImageButton menuButton = (ImageButton) findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DonateConfirmAmount.this, MenuActivity.class);
+                startActivity(intent);
             }
         });
     }
