@@ -50,8 +50,8 @@ public class ListItemAdapter extends ArrayAdapter {
         TextView labelView = (TextView) convertView.findViewById(R.id.label);
         labelView.setText(label);
         labelView.setTextColor(Color.parseColor("#FF5337"));
-        Typeface custom_font = Typeface.createFromAsset(context.getAssets(), "fonts/Avenir.ttc");
-        labelView.setTypeface(custom_font);
+//        Typeface custom_font = Typeface.createFromAsset(context.getAssets(), "fonts/Avenir.ttc");
+//        labelView.setTypeface(custom_font);
         labelView.setTextSize(24);
 
         final Intent goTo = getGoTo(label);

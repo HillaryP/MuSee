@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/backorangebutton"
         android:padding="6dp"
-        android:background="#3F4752"
+        android:background="@null"
         android:id="@+id/back"/>
     <ListView
         android:layout_width="match_parent"
@@ -25,7 +25,15 @@
         android:id="@+id/list_view" />
     <Button
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="10dp"
+        android:background="@null"
+        android:textColor="#FF5337"
+        android:divider="@android:color/transparent"
+        android:textStyle="normal"
+        android:textSize="22sp"
+        android:layout_alignParentLeft="true"
         android:id="@+id/donate"
         android:text="Donate"
         />
