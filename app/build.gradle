@@ -20,8 +20,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:support-v4:+'
-    compile fileTree(dir: 'libs', include: 'wikitudesdk.jar')
+    compile fileTree(include: 'wikitudesdk.jar', dir: 'libs')
+    compile files('libs/wikitudesdk.jar')
+    compile 'com.parse.bolts:bolts-android:1.+'
+    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
 }
