@@ -19,6 +19,8 @@ public class MuSeeApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/Avenir.ttc");
+
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
