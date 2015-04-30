@@ -57,7 +57,7 @@ public class MenuActivity extends Activity {
         menuItems.add(new MenuListItem("", "favorites"));
         menuItems.add(new MenuListItem("", "Exhibits"));
         menuItems.add(new MenuListItem("", "Events"));
-        menuItems.add(new MenuListItem("", "Museum Info", true));
+        //menuItems.add(new MenuListItem("", "Museum Info", true));
         menuItems.add(new MenuListItem("", "Accessibility", true));
         menuItems.add(new MenuListItem("", "Map", true));
         menuItems.add(new MenuListItem("", "Museum Feedback", true));

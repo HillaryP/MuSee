@@ -45,6 +45,8 @@ public class ListItemAdapter extends ArrayAdapter {
     public View getView ( final int position, View convertView, ViewGroup parent ) {
         convertView = (LinearLayout) inflater.inflate( resource, null );
 
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.image);
+
         MenuListItem item = (MenuListItem) getItem( position );
         String label = item.getLabel();
         TextView labelView = (TextView) convertView.findViewById(R.id.label);
@@ -54,7 +56,8 @@ public class ListItemAdapter extends ArrayAdapter {
 //        labelView.setTypeface(custom_font);
         labelView.setTextSize(24);
 
-        final Intent goTo = getGoTo(label);
+        final Intent goTo = getGoTo(label, imageView);
+
         labelView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,23 +67,33 @@ public class ListItemAdapter extends ArrayAdapter {
         return convertView;
     }
 
-    public Intent getGoTo(String label) {
+    public Intent getGoTo(String label, ImageView imageView) {
+
+
         switch (label) {
             case "SCAN ARTIFACTS":
+                imageView.setImageResource(R.drawable.smallmenu3);
                 return new Intent(context, CameraActivity.class);
             case "FAVORITES":
+                imageView.setImageResource(R.drawable.smallmenu4);
                 return new Intent(context, FavoritesActivity.class);
             case "EXHIBITS":
+                imageView.setImageResource(R.drawable.smallmenu2);
                 return new Intent(context, ExhibitActivity.class);
             case "EVENTS":
+                imageView.setImageResource(R.drawable.smallmenu5);
                 return new Intent(context, EventActivity.class);
             case "ACCESSIBILITY":
+                imageView.setImageResource(R.drawable.smallmenu8);
                 return new Intent(context, AccessibilityActivity.class);
             case "MAP":
+                imageView.setImageResource(R.drawable.smallmenu7);
                 return new Intent(context, MapActivity.class);
             case "MUSEUM FEEDBACK":
+                imageView.setImageResource(R.drawable.smallmenu6);
                 return new Intent(context, FeedbackActivity.class);
             case "DONATE TO THE MUSEUM":
+                imageView.setImageResource(R.drawable.smallmenu1);
                 return new Intent(context, DonateActivity.class);
         };
         return new Intent(context, MenuActivity.class);
