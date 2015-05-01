@@ -3,11 +3,22 @@ package edu.uw.prathh.musee.exhibits;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.parse.GetCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
@@ -29,8 +40,10 @@ public class ExhibitActivity extends Activity {
                 startActivity(intent);
             }
         });
-    }
 
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new GridAdapter(this));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

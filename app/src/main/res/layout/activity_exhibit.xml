@@ -1,8 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.uw.prathh.musee.exhibits.ExhibitActivity">
+    tools:context="edu.uw.prathh.musee.exhibits.ExhibitActivity"
+    android:background="#ffbebebe">
     <include layout="@layout/header_layout"
         android:id="@+id/header" />
+    <GridView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:columnWidth="180dp"
+        android:numColumns="auto_fit"
+        android:id="@+id/gridview">
+        </GridView>
 </LinearLayout>
