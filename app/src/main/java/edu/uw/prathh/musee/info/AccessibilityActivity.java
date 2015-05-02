@@ -2,12 +2,15 @@ package edu.uw.prathh.musee.info;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -16,6 +19,9 @@ import edu.uw.prathh.musee.R;
 
 
 public class AccessibilityActivity extends Activity {
+    ImageButton button;
+    ImageButton button_two;
+    ImageButton button_three;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +39,75 @@ public class AccessibilityActivity extends Activity {
             }
         });
 
-    }
+        View accessibilityList = (View) findViewById(R.id.linearlayout1);
+        View accessibilityList2 = (View) findViewById(R.id.linearlayout2);
+        View accessibilityList3 = (View) findViewById(R.id.linearlayout3);
 
+        accessibilityList2.setVisibility(View.GONE);
+        accessibilityList3.setVisibility(View.GONE);
+        accessibilityList.setVisibility(View.GONE);
+
+
+        button = (ImageButton) findViewById(R.id.tab1);
+        button_two = (ImageButton) findViewById(R.id.tab2);
+        button_three = (ImageButton) findViewById(R.id.tab3);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    button.setBackgroundResource(R.drawable.buttoncolor);
+                    //button.setBackgroundColor(Color.parseColor("#3F4752"));
+                    View list = (View) findViewById(R.id.linearlayout1);
+                    View list2 = (View) findViewById(R.id.linearlayout2);
+                    View list3 = (View) findViewById(R.id.linearlayout3);
+
+                    list2.setVisibility(View.INVISIBLE);
+                    list2.setVisibility(View.GONE);
+                    list3.setVisibility(View.INVISIBLE);
+                    list3.setVisibility(View.GONE);
+                    list.setVisibility(View.VISIBLE);
+                }
+
+            });
+
+        button_two.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                //button_two.setBackgroundColor(Color.parseColor("#3F4752"));
+                View list = (View)findViewById(R.id.linearlayout1);
+                View list2 = (View)findViewById(R.id.linearlayout2);
+                View list3 = (View)findViewById(R.id.linearlayout3);
+
+                list.setVisibility(View.INVISIBLE);
+                list.setVisibility(View.GONE);
+                list3.setVisibility(View.INVISIBLE);
+                list3.setVisibility(View.GONE);
+                list2.setVisibility(View.VISIBLE);
+            }
+        });
+
+        button_three.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                //button_three.setBackgroundColor(Color.parseColor("#3F4752"));
+
+                View list = (View)findViewById(R.id.linearlayout1);
+                View list2 = (View)findViewById(R.id.linearlayout2);
+                View list3 = (View)findViewById(R.id.linearlayout3);
+
+                list.setVisibility(View.INVISIBLE);
+                list2.setVisibility(View.INVISIBLE);
+                list3.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
