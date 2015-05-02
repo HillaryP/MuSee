@@ -57,7 +57,6 @@ public class AccessibilityActivity extends Activity {
 
                 @Override
                 public void onClick(View arg0) {
-                    button.setBackgroundResource(R.drawable.buttoncolor);
                     //button.setBackgroundColor(Color.parseColor("#3F4752"));
                     View list = (View) findViewById(R.id.linearlayout1);
                     View list2 = (View) findViewById(R.id.linearlayout2);
