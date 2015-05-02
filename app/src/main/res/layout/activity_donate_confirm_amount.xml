@@ -13,9 +13,16 @@
         android:id="@+id/amt"
         android:gravity="center_vertical|center_horizontal" />
 
+
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirm Donation"
+        android:background="#3F4752"
+        android:textColor="#FF5237"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="Donate"
+        android:layout_weight="0"
         android:id="@+id/confirm" />
 </LinearLayout>

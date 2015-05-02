@@ -95,6 +95,7 @@
         android:gravity="top|left"
         android:ems="10"
         android:id="@+id/editText"
+        android:padding="10dp"
         android:layout_weight="1" />
 
     <Button
