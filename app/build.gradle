@@ -23,6 +23,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:support-v4:+'
+    compile 'com.google.android.gms:play-services:+'
     compile fileTree(include: 'wikitudesdk.jar', dir: 'libs')
     compile files('libs/wikitudesdk.jar')
     compile 'com.parse.bolts:bolts-android:1.+'
