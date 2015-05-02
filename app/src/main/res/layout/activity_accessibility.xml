@@ -11,27 +11,89 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
         android:orientation="horizontal">
 
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="150dp"
+            android:layout_marginRight="-8dp"
             android:id="@+id/tab1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/tab1"
             android:text="Tab1"/>
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="150dp"
+            android:layout_marginRight="-8dp"
             android:id="@+id/tab2"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/tab2"
             android:text="Tab2"/>
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_marginTop="150dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
             android:layout_height="wrap_content"
+            android:src="@drawable/tab3"
             android:id="@+id/tab3"
             android:text="Tab3"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearlayout1"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Accessibility Tab 1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="260sp"
+            android:id="@+id/accessibilityView1"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearlayout2"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Accessibility Tab 2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="260sp"
+            android:id="@+id/accessibilityView2"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearlayout3"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Accessibility Tab 3"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="260sp"
+            android:id="@+id/accessibilityView3"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
