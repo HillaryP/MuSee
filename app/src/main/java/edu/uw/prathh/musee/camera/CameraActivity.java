@@ -185,5 +185,6 @@ public class CameraActivity extends Activity implements
 
     private void handleNewLocation(Location location) {
         Log.d("CameraActivity", location.toString());
+        architectView.setLocation(location.getLatitude(), location.getLongitude(), 0.0, 0.0f);
     }
 }
