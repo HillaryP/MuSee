@@ -3,6 +3,7 @@ package edu.uw.prathh.musee.feedback;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +29,6 @@ public class FeedbackActivity extends Activity {
     private Button btnFeedback;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +47,12 @@ public class FeedbackActivity extends Activity {
         });
     }
 
+    //
+    // if (radioFeedbackGroup.setSelected(true) {
+    //         radioFeedbackGroup.setBackgroundResource(R.drawable.checked);
+    // } else if (radioFeedbackGroup.setSelected(false) {
+    //        radioFeedbackGroup.setBackgroundResource(R.drawable.checked);
+    // }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,11 +65,13 @@ public class FeedbackActivity extends Activity {
         radioFeedbackGroup = (RadioGroup) findViewById(R.id.radioFeedbackGroup);
         btnFeedback = (Button) findViewById(R.id.btn_feedback);
 
+
         btnFeedback.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 int selectedId = radioFeedbackGroup.getCheckedRadioButtonId();
                 radioFeedbackButton = (RadioButton) findViewById(selectedId);
+                radioFeedbackButton.setBackgroundResource(R.drawable.checked);
                 Log.i("Feedback Activity", "Button has been clicked");
 
                 RadioButton rb = (RadioButton) radioFeedbackGroup.findViewById(radioFeedbackGroup.getCheckedRadioButtonId());
@@ -79,6 +87,18 @@ public class FeedbackActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void selectedButtons (View view) {
+        //buttons
+
+        // loop through every view/button in group
+        // if view is .setSelected (true), one format
+        //
+
+        // loop through all radio buttons and check if each button.setSelected(true)
+        // set radioFeedbackGroup.setBackgroundResource(R.drawable.checked);
+        // set radioFeedbackGroup.setBackgroundResource(R.drawable.unchecked);
     }
 
     @Override

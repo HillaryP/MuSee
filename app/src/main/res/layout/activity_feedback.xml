@@ -19,40 +19,72 @@
         android:textColor="#FF5237"
         android:textSize="20dp"/>
 
+
+
+    <!--<GridLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:paddingLeft="40dp"-->
+        <!--android:columnCount="5"-->
+        <!--android:rowCount="2"-->
+        <!--android:useDefaultMargins="true">-->
+
     <RadioGroup
         android:id="@+id/radioFeedbackGroup"
         android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:orientation="horizontal"
         android:layout_height="wrap_content">
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:paddingLeft="40dp"
-        android:columnCount="5"
-        android:rowCount="2"
-        android:useDefaultMargins="true">
+
 
         <RadioButton
             android:id="@+id/radio_1"
+            android:background="@drawable/radiobuttonbackground"
+            android:button="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:checked="true" />
         <RadioButton
             android:id="@+id/radio_2"
+            android:background="@drawable/radiobuttonbackground"
+            android:button="@android:color/transparent"
             android:layout_width="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/radio_3"
+            android:background="@drawable/radiobuttonbackground"
+            android:button="@android:color/transparent"
             android:layout_width="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/radio_4"
+            android:background="@drawable/radiobuttonbackground"
+            android:button="@android:color/transparent"
+            android:onClick="onRadioButtonClicked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/radio_5"
+            android:background="@drawable/radiobuttonbackground"
+            android:button="@android:color/transparent"
+            android:onClick="onRadioButtonClicked"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        </RadioGroup>
+    <!--</GridLayout>-->
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,14 +95,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_column="4"
             android:textAllCaps="true"
             android:textSize="10dp"
             android:textColor="#FF5237"
             android:text="Like" />
-    </GridLayout>
-    </RadioGroup>
-
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
