@@ -3,6 +3,7 @@ package edu.uw.prathh.musee.info;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -57,7 +58,14 @@ public class AccessibilityActivity extends Activity {
 
                 @Override
                 public void onClick(View arg0) {
-                    //button.setBackgroundColor(Color.parseColor("#3F4752"));
+                    button.getBackground().setColorFilter(Color.parseColor("#3F4752"), PorterDuff.Mode.MULTIPLY);
+                    button.setImageResource(R.drawable.tabwhite1);
+
+                    button_two.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
+                    button_two.setImageResource(R.drawable.tab2);
+
+                    button_three.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
+                    button_three.setImageResource(R.drawable.tab3);
                     View list = (View) findViewById(R.id.linearlayout1);
                     View list2 = (View) findViewById(R.id.linearlayout2);
                     View list3 = (View) findViewById(R.id.linearlayout3);
@@ -75,7 +83,14 @@ public class AccessibilityActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                //button_two.setBackgroundColor(Color.parseColor("#3F4752"));
+                button.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
+                button.setImageResource(R.drawable.tab1);
+
+                button_two.getBackground().setColorFilter(Color.parseColor("#3F4752"), PorterDuff.Mode.MULTIPLY);
+                button_two.setImageResource(R.drawable.tabwhite2);
+
+                button_three.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
+                button_three.setImageResource(R.drawable.tab3);
                 View list = (View)findViewById(R.id.linearlayout1);
                 View list2 = (View)findViewById(R.id.linearlayout2);
                 View list3 = (View)findViewById(R.id.linearlayout3);
@@ -92,7 +107,14 @@ public class AccessibilityActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                //button_three.setBackgroundColor(Color.parseColor("#3F4752"));
+                button.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
+                button.setImageResource(R.drawable.tab1);
+
+                button_two.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
+                button_two.setImageResource(R.drawable.tab2);
+                
+                button_three.getBackground().setColorFilter(Color.parseColor("#3F4752"), PorterDuff.Mode.MULTIPLY);
+                button_three.setImageResource(R.drawable.tabwhite3);
 
                 View list = (View)findViewById(R.id.linearlayout1);
                 View list2 = (View)findViewById(R.id.linearlayout2);
