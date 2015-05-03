@@ -1,11 +1,15 @@
 // implementation of AR-Experience (aka "World")
 var World = {
+	// you may request new data from server periodically, however: in this sample data is only requested once
+	isRequestingData: false,
+
 	// true once data was fetched
 	initiallyLoadedData: false,
 
 	// different POI-Marker assets
 	markerDrawable_idle: null,
 	markerDrawable_selected: null,
+	markerDrawable_directionIndicator: null,
 
 	// list of AR.GeoObjects that are currently shown in the scene / World
 	markerList: [],
@@ -15,6 +19,7 @@ var World = {
 
 	// called to inject new POI data
 	loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
+
 		// empty list of visible markers
 		World.markerList = [];
 
@@ -33,10 +38,6 @@ var World = {
 				"description": poiData[currentPlaceNr].description
 			};
 
-			/*
-				To be able to deselect a marker while the user taps on the empty screen, 
-				the World object holds an array that contains each marker.
-			*/
 			World.markerList.push(new Marker(singlePoi));
 		}
 
@@ -61,15 +62,8 @@ var World = {
 	// location updates, fired every time you call architectView.setLocation() in native environment
 	locationChanged: function locationChangedFn(lat, lon, alt, acc) {
 
-		/*
-			The custom function World.onLocationChanged checks with the flag World.initiallyLoadedData if the function was already called.
-			With the first call of World.onLocationChanged an object that contains geo information will be created which will be later used to create a marker using the World.loadPoisFromJsonData function.
-		*/
+		// request data if not already present
 		if (!World.initiallyLoadedData) {
-			/* 
-				requestDataFromLocal with the geo information as parameters (latitude, longitude)
-				creates different poi data to a random location in the user's vicinity.
-			*/
 			World.requestDataFromLocal(lat, lon);
 			World.initiallyLoadedData = true;
 		}
@@ -77,7 +71,9 @@ var World = {
 
 	// fired when user pressed maker in cam
 	onMarkerSelected: function onMarkerSelectedFn(marker) {
-
+        if (World.initialized) {
+            document.location = "architectsdk://button?action=captureScreen";
+        }
 		// deselect previous marker
 		if (World.currentMarker) {
 			if (World.currentMarker.poiData.id == marker.poiData.id) {
@@ -98,32 +94,52 @@ var World = {
 		}
 	},
 
-	// request POI data
-	requestDataFromLocal: function requestDataFromLocalFn(centerPointLatitude, centerPointLongitude) {
-		var poisToCreate = 20;
-		var poiData = [];
+	/*
+		In case the data of your ARchitect World is static the content should be stored within the application. 
+		Create a JavaScript file (e.g. myJsonData.js) where a globally accessible variable is defined.
+		Include the JavaScript in the ARchitect Worlds HTML by adding <script src="js/myJsonData.js"/> to make POI information available anywhere in your JavaScript.
+	*/
 
-		for (var i = 0; i < poisToCreate; i++) {
-			poiData.push({
-				"id": (i + 1),
-				"longitude": (centerPointLongitude + (Math.random() / 5 - 0.1)),
-				"latitude": (centerPointLatitude + (Math.random() / 5 - 0.1)),
-				"description": ("This is the description of POI#" + (i + 1)),
-				"altitude": "100.0",
-				"name": ("POI#" + (i + 1))
-			});
-		}
-		World.loadPoisFromJsonData(poiData);
+	// request POI data
+	requestDataFromLocal: function requestDataFromLocalFn(lat, lon) {
+
+		//var poisNearby = Helper.bringPlacesToUser(myJsonData, lat, lon);
+		//World.loadPoisFromJsonData(poisNearby);
+
+		/*
+		For demo purpose they are relocated randomly around the user using a 'Helper'-function.
+		Comment out previous 2 lines and use the following line > instead < to use static values 1:1. 
+		*/
+
+		World.loadPoisFromJsonData(myJsonData);
 	}
 
 };
 
-/* 
-	Set a custom function where location changes are forwarded to. There is also a possibility to set AR.context.onLocationChanged to null. In this case the function will not be called anymore and no further location updates will be received. 
-*/
+var Helper = {
+
+	/* 
+		For demo purpose only, this method takes poi data and a center point (latitude, longitude) to relocate the given places randomly around the user
+	*/
+	bringPlacesToUser: function bringPlacesToUserFn(poiData, latitude, longitude) {
+		for (var i = 0; i < poiData.length; i++) {
+			poiData[i].latitude = latitude + (Math.random() / 5 - 0.1);
+			poiData[i].longitude = longitude + (Math.random() / 5 - 0.1);
+			/* 
+			Note: setting altitude to '0'
+			will cause places being shown below / above user,
+			depending on the user 's GPS signal altitude. 
+				Using this contant will ignore any altitude information and always show the places on user-level altitude
+			*/
+			poiData[i].altitude = AR.CONST.UNKNOWN_ALTITUDE;
+		}
+		return poiData;
+	}
+}
+
+
+/* forward locationChanges to custom function */
 AR.context.onLocationChanged = World.locationChanged;
 
-/*
-	To detect clicks where no drawable was hit set a custom function on AR.context.onScreenClick where the currently selected marker is deselected.
-*/
+/* forward clicks in empty area to World */
 AR.context.onScreenClick = World.onScreenClick;

@@ -3,8 +3,11 @@ package edu.uw.prathh.musee.camera;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +26,9 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 public class CameraActivity extends Activity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -34,6 +40,7 @@ public class CameraActivity extends Activity implements
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
+    private ArchitectView.ArchitectUrlListener urlListener;
 
     /*=====================================Lifecycle Event Handler methods==================================*/
 
@@ -62,16 +69,11 @@ public class CameraActivity extends Activity implements
                 startActivity(intent);
             }
         });
-    }
 
-    protected synchronized void buildGoogleApiClient() {
-        Log.i("CameraActivity", "buildGoogleApiClient Called");
-        this.mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        this.mGoogleApiClient.connect();
+        this.urlListener = getUrlListener();
+        if ( this.urlListener !=null ) {
+            this.architectView.registerUrlListener( this.getUrlListener() );
+        }
     }
 
     @Override
@@ -144,6 +146,16 @@ public class CameraActivity extends Activity implements
 
     /*============================Location Connection/update methods===========================*/
 
+    protected synchronized void buildGoogleApiClient() {
+        Log.i("CameraActivity", "buildGoogleApiClient Called");
+        this.mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        this.mGoogleApiClient.connect();
+    }
+
     protected void createLocationRequest() {
         Log.i("CameraActivity", "createLocationRequest called");
         this.mLocationRequest = new LocationRequest()
@@ -186,5 +198,65 @@ public class CameraActivity extends Activity implements
     private void handleNewLocation(Location location) {
         Log.d("CameraActivity", location.toString());
         architectView.setLocation(location.getLatitude(), location.getLongitude(), 0.0, 0.0f);
+    }
+
+    /* ================================Wikitude specific methods=================================*/
+
+    public ArchitectView.ArchitectUrlListener getUrlListener() {
+        return new ArchitectView.ArchitectUrlListener() {
+
+            @Override
+            public boolean urlWasInvoked(String uriString) {
+                Uri invokedUri = Uri.parse(uriString);
+
+                // pressed "More" button on POI-detail panel
+                if ("markerselected".equalsIgnoreCase(invokedUri.getHost())) {
+                    final Intent poiDetailIntent = new Intent(CameraActivity.this, MenuActivity.class);
+                    CameraActivity.this.startActivity(poiDetailIntent);
+                    return true;
+                }
+
+                // pressed snapshot button. check if host is button to fetch e.g. 'architectsdk://button?action=captureScreen', you may add more checks if more buttons are used inside AR scene
+                else if ("button".equalsIgnoreCase(invokedUri.getHost())) {
+                    CameraActivity.this.architectView.captureScreen(ArchitectView.CaptureScreenCallback.CAPTURE_MODE_CAM_AND_WEBVIEW, new ArchitectView.CaptureScreenCallback() {
+
+                        @Override
+                        public void onScreenCaptured(final Bitmap screenCapture) {
+                            // store screenCapture into external cache directory
+                            final File screenCaptureFile = new File(Environment.getExternalStorageDirectory().toString(), "screenCapture_" + System.currentTimeMillis() + ".jpg");
+
+                            // 1. Save bitmap to file & compress to jpeg. You may use PNG too
+                            try {
+                                final FileOutputStream out = new FileOutputStream(screenCaptureFile);
+                                screenCapture.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                                out.flush();
+                                out.close();
+
+                                // 2. create send intent
+                                final Intent share = new Intent(Intent.ACTION_SEND);
+                                share.setType("image/jpg");
+                                share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(screenCaptureFile));
+
+                                // 3. launch intent-chooser
+                                final String chooserTitle = "Share Snaphot";
+                                CameraActivity.this.startActivity(Intent.createChooser(share, chooserTitle));
+
+                            } catch (final Exception e) {
+                                // should not occur when all permissions are set
+                                CameraActivity.this.runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        // show toast message in case something went wrong
+                                        Toast.makeText(CameraActivity.this, "Unexpected error, " + e, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+                return true;
+            }
+        };
     }
 }
