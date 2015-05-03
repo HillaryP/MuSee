@@ -44,7 +44,7 @@ public class AccessibilityActivity extends Activity {
         View accessibilityList2 = (View) findViewById(R.id.linearlayout2);
         View accessibilityList3 = (View) findViewById(R.id.linearlayout3);
 
-        accessibilityList2.setVisibility(View.GONE);
+        accessibilityList2.setVisibility(View.VISIBLE);
         accessibilityList3.setVisibility(View.GONE);
         accessibilityList.setVisibility(View.GONE);
 
@@ -52,6 +52,9 @@ public class AccessibilityActivity extends Activity {
         button = (ImageButton) findViewById(R.id.tab1);
         button_two = (ImageButton) findViewById(R.id.tab2);
         button_three = (ImageButton) findViewById(R.id.tab3);
+
+        button_two.getBackground().setColorFilter(Color.parseColor("#3F4752"), PorterDuff.Mode.MULTIPLY);
+        button_two.setImageResource(R.drawable.tabwhite2);
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +115,7 @@ public class AccessibilityActivity extends Activity {
 
                 button_two.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
                 button_two.setImageResource(R.drawable.tab2);
-                
+
                 button_three.getBackground().setColorFilter(Color.parseColor("#3F4752"), PorterDuff.Mode.MULTIPLY);
                 button_three.setImageResource(R.drawable.tabwhite3);
 
