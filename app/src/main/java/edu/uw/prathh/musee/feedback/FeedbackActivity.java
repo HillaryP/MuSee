@@ -47,13 +47,6 @@ public class FeedbackActivity extends Activity {
         });
     }
 
-    //
-    // if (radioFeedbackGroup.setSelected(true) {
-    //         radioFeedbackGroup.setBackgroundResource(R.drawable.checked);
-    // } else if (radioFeedbackGroup.setSelected(false) {
-    //        radioFeedbackGroup.setBackgroundResource(R.drawable.checked);
-    // }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
