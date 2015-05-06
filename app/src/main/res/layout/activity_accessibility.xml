@@ -53,13 +53,15 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Accessibility Tab 1"
+            android:text="The elevator is a passenger/freight elevator that serves both public floors and the basement. Follow signs or ask staff for assistance in locating the elevator. Highest button is 36, Braille markers."
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="260sp"
             android:layout_marginLeft="25dp"
+            android:layout_marginRight="35dp"
             android:id="@+id/accessibilityView1"
-            android:textSize="30sp"/>
+            android:textSize="16sp"/>
+
 
     </LinearLayout>
 
@@ -70,13 +72,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Accessibility Tab 2"
+            android:text="Lot N1 has disability and wheelchair parking. The circular drive in front from Memorial Way has wheelchair parking."
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="260sp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:id="@+id/accessibilityView2"
-            android:textSize="30sp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
@@ -88,13 +91,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Accessibility Tab 3"
+            android:text="Check back soon, we will be adding more information to this section!"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="260sp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:id="@+id/accessibilityView3"
-            android:textSize="30sp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
