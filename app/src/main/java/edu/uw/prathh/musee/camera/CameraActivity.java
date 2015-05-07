@@ -3,19 +3,24 @@ package edu.uw.prathh.musee.camera;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.wikitude.architect.ArchitectView;
+import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
 
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
@@ -29,7 +34,7 @@ import com.google.android.gms.location.LocationServices;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class CameraActivity extends Activity implements
+public class CameraActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -202,61 +207,51 @@ public class CameraActivity extends Activity implements
 
     /* ================================Wikitude specific methods=================================*/
 
-    public ArchitectView.ArchitectUrlListener getUrlListener() {
-        return new ArchitectView.ArchitectUrlListener() {
-
+    public ArchitectUrlListener getUrlListener() {
+        return new ArchitectUrlListener() {
             @Override
             public boolean urlWasInvoked(String uriString) {
                 Uri invokedUri = Uri.parse(uriString);
+                Log.i("Wikitude", "URI invoked: " + uriString);
 
                 // pressed "More" button on POI-detail panel
                 if ("markerselected".equalsIgnoreCase(invokedUri.getHost())) {
-                    final Intent poiDetailIntent = new Intent(CameraActivity.this, MenuActivity.class);
-                    CameraActivity.this.startActivity(poiDetailIntent);
-                    return true;
-                }
-
-                // pressed snapshot button. check if host is button to fetch e.g. 'architectsdk://button?action=captureScreen', you may add more checks if more buttons are used inside AR scene
-                else if ("button".equalsIgnoreCase(invokedUri.getHost())) {
-                    CameraActivity.this.architectView.captureScreen(ArchitectView.CaptureScreenCallback.CAPTURE_MODE_CAM_AND_WEBVIEW, new ArchitectView.CaptureScreenCallback() {
-
-                        @Override
-                        public void onScreenCaptured(final Bitmap screenCapture) {
-                            // store screenCapture into external cache directory
-                            final File screenCaptureFile = new File(Environment.getExternalStorageDirectory().toString(), "screenCapture_" + System.currentTimeMillis() + ".jpg");
-
-                            // 1. Save bitmap to file & compress to jpeg. You may use PNG too
-                            try {
-                                final FileOutputStream out = new FileOutputStream(screenCaptureFile);
-                                screenCapture.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                                out.flush();
-                                out.close();
-
-                                // 2. create send intent
-                                final Intent share = new Intent(Intent.ACTION_SEND);
-                                share.setType("image/jpg");
-                                share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(screenCaptureFile));
-
-                                // 3. launch intent-chooser
-                                final String chooserTitle = "Share Snaphot";
-                                CameraActivity.this.startActivity(Intent.createChooser(share, chooserTitle));
-
-                            } catch (final Exception e) {
-                                // should not occur when all permissions are set
-                                CameraActivity.this.runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        // show toast message in case something went wrong
-                                        Toast.makeText(CameraActivity.this, "Unexpected error, " + e, Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            }
-                        }
-                    });
+                    final ArtifactInfoFragment artifactInfo = new ArtifactInfoFragment();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .add(R.id.architect_view, artifactInfo)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                 }
                 return true;
             }
         };
+    }
+
+    /**
+     * Information fragment for artifact-specific information
+     */
+    public static class ArtifactInfoFragment extends Fragment {
+
+        public ArtifactInfoFragment() { }
+
+        public static ArtifactInfoFragment newInstance() {
+            ArtifactInfoFragment f = new ArtifactInfoFragment();
+            return f;
+        }
+
+        @Override
+        public void onCreate(Bundle bundle) {
+            super.onCreate(bundle);
+            if (getArguments() != null) {
+
+            }
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.artifact_info_frag, container, false);
+            return rootView;
+        }
     }
 }
