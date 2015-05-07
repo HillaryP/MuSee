@@ -3,7 +3,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context="edu.uw.prathh.musee.info.MapActivity">
     <include layout="@layout/header_layout"
         android:id="@+id/header" />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="-10dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_marginRight="-10dp"
+            android:id="@+id/floor1"
+            android:layout_gravity="left"
+            android:paddingLeft="42dp"
+            android:paddingRight="42dp"
+            android:text="Lower Floor"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/floor2"
+            android:layout_margin="0dp"
+            android:layout_gravity="right"
+            android:paddingLeft="42dp"
+            android:paddingRight="42dp"
+            android:text="Upper Floor"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:id="@+id/lowerfloor"
+        android:src="@drawable/maplowerfloor"
+    />
+
+    <ImageView
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:id="@+id/upperfloor"
+        android:src="@drawable/mapupperfloor"
+        />
 </LinearLayout>

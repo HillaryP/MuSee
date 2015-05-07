@@ -71,24 +71,7 @@ var World = {
 
 	// fired when user pressed maker in cam
 	onMarkerSelected: function onMarkerSelectedFn(marker) {
-        $("#poi-detail-title").html(marker.poiData.title);
-        $("#poi-detail-description").html(marker.poiData.description);
-
-        // distance and altitude are measured in meters by the SDK. You may convert them to miles / feet if required.
-        //var distanceToUserValue = (marker.distanceToUser > 999) ? ((marker.distanceToUser / 1000).toFixed(2) + " km") : (Math.round(marker.distanceToUser) + " m");
-
-        //$("#poi-detail-distance").html(distanceToUserValue);
-
-        // show panel
-        $("#panel-poidetail").panel("open", 123);
-
-        $(".ui-panel-dismiss").unbind("mousedown");
-
-        // deselect AR-marker when user exits detail screen div.
-        $("#panel-poidetail").on("panelbeforeclose", function(event, ui) {
-            World.currentMarker.setDeselected(World.currentMarker);
-        });
-
+        document.location = "architectsdk://markerselected";
 		// deselect previous marker
 		if (World.currentMarker) {
 			if (World.currentMarker.poiData.id == marker.poiData.id) {
