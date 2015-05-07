@@ -44,15 +44,6 @@ function Marker(poiData) {
         }
     });
 
-    // create an AR.Label for the marker's description
-    this.descriptionLabel = new AR.Label(poiData.description.trunc(15), 0.8, {
-        zOrder: 1,
-        offsetY: -0.55,
-        style: {
-            textColor: '#FFFFFF'
-        }
-    });
-
     /*
         Create the AR.GeoObject with the drawable objects and define the AR.ImageDrawable as an indicator target on the marker AR.GeoObject. The direction indicator is displayed automatically when necessary. AR.Drawable subclasses (e.g. AR.Circle) can be used as direction indicators.
     */
