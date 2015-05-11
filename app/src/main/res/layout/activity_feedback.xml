@@ -44,8 +44,7 @@
             android:button="@android:color/transparent"
             android:layout_marginRight="25dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true" />
+            android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/radio_2"
             android:background="@drawable/radiobuttonbackground"
@@ -59,7 +58,8 @@
             android:layout_marginRight="25dp"
             android:button="@android:color/transparent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:checked="true" />
         <RadioButton
             android:id="@+id/radio_4"
             android:background="@drawable/radiobuttonbackground"
