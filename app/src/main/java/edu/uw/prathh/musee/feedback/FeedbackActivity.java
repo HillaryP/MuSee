@@ -58,7 +58,6 @@ public class FeedbackActivity extends Activity {
         radioFeedbackGroup = (RadioGroup) findViewById(R.id.radioFeedbackGroup);
         btnFeedback = (Button) findViewById(R.id.btn_feedback);
 
-
         btnFeedback.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,8 +67,25 @@ public class FeedbackActivity extends Activity {
                 Log.i("Feedback Activity", "Button has been clicked");
 
                 RadioButton rb = (RadioButton) radioFeedbackGroup.findViewById(radioFeedbackGroup.getCheckedRadioButtonId());
-                Toast.makeText(FeedbackActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
                 String text = (String)rb.getText();
+                int score;
+                switch(selectedId) {
+                    case (R.id.radio_1):
+                        score = 1;
+                        break;
+                    case (R.id.radio_2):
+                        score = 2;
+                        break;
+                    case (R.id.radio_5):
+                        score = 5;
+                        break;
+                    case (R.id.radio_4):
+                        score = 4;
+                        break;
+                    default:
+                        score = 3;
+                        break;
+                }
 
                 EditText comment = (EditText)findViewById(R.id.editText);
                 String value = comment.getText().toString();
@@ -77,6 +93,10 @@ public class FeedbackActivity extends Activity {
                 Log.i("Feedback Activity", "Comments: " + value);
 
                 Intent intent = new Intent(FeedbackActivity.this, FeedbackThankYou.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("comment", value);
+                bundle.putInt("score", score);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

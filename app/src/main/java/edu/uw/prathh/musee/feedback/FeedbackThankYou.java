@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.parse.ParseObject;
+
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
 
@@ -29,6 +31,12 @@ public class FeedbackThankYou extends Activity {
                 startActivity(intent);
             }
         });
+
+        Bundle extras = this.getIntent().getExtras();
+        ParseObject feedback = new ParseObject("feedback");
+        feedback.put("comment", extras.getString("comment"));
+        feedback.put("score", extras.getInt("score"));
+        feedback.saveInBackground();
     }
 
 
