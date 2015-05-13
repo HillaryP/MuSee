@@ -19,16 +19,6 @@
         android:textColor="#FF5237"
         android:textSize="20dp"/>
 
-
-
-    <!--<GridLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:paddingLeft="40dp"-->
-        <!--android:columnCount="5"-->
-        <!--android:rowCount="2"-->
-        <!--android:useDefaultMargins="true">-->
-
     <RadioGroup
         android:id="@+id/radioFeedbackGroup"
         android:layout_width="match_parent"
