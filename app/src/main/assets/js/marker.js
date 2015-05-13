@@ -18,7 +18,7 @@ function Marker(poiData) {
     var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude, poiData.altitude);
 
     // create an AR.ImageDrawable for the marker in idle state
-    this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle, 3, {
+    this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle, 2.5, {
         zOrder: 0,
         opacity: 1.0,
         /*
@@ -28,7 +28,7 @@ function Marker(poiData) {
     });
 
     // create an AR.ImageDrawable for the marker in selected state
-    this.markerDrawable_selected = new AR.ImageDrawable(World.markerDrawable_selected, 3, {
+    this.markerDrawable_selected = new AR.ImageDrawable(World.markerDrawable_selected, 2.5, {
         zOrder: 0,
         opacity: 0.0,
         onClick: null
@@ -42,6 +42,23 @@ function Marker(poiData) {
             textColor: '#FFFFFF',
             fontStyle: AR.CONST.FONT_STYLE.BOLD
         }
+    });
+
+    // create an AR.Label for the marker's description
+    this.descriptionLabel = new AR.Label(poiData.description.trunc(15), 0.8, {
+        zOrder: 1,
+        offsetY: -0.55,
+        style: {
+            textColor: '#FFFFFF'
+        }
+    });
+
+    /*
+        Create an AR.ImageDrawable using the AR.ImageResource for the direction indicator which was created in the World. Set options regarding the offset and anchor of the image so that it will be displayed correctly on the edge of the screen.
+    */
+    this.directionIndicatorDrawable = new AR.ImageDrawable(World.markerDrawable_directionIndicator, 0.1, {
+        enabled: false,
+        verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
     });
 
     /*
@@ -83,6 +100,8 @@ Marker.prototype.getOnClickTrigger = function(marker) {
         } else {
             AR.logger.debug('a animation is already running');
         }
+
+
         return true;
     };
 };
@@ -131,6 +150,8 @@ Marker.prototype.setSelected = function(marker) {
     // sets the click trigger function for the selected state marker
     marker.markerDrawable_selected.onClick = Marker.prototype.getOnClickTrigger(marker);
 
+    // enables the direction indicator drawable for the current marker
+    marker.directionIndicatorDrawable.enabled = true;
     // starts the selected-state animation
     marker.animationGroup_selected.start();
 };
@@ -173,6 +194,8 @@ Marker.prototype.setDeselected = function(marker) {
     // removes function that is set on the onClick trigger of the selected-state marker
     marker.markerDrawable_selected.onClick = null;
 
+    // disables the direction indicator drawable for the current marker
+    marker.directionIndicatorDrawable.enabled = false;
     // starts the idle-state animation
     marker.animationGroup_idle.start();
 };

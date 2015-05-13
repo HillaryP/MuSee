@@ -26,6 +26,7 @@ var World = {
 		// start loading marker assets
 		World.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png");
 		World.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png");
+		World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
 
 		// loop through POI-information and create an AR.GeoObject (=Marker) per POI
 		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
@@ -71,7 +72,7 @@ var World = {
 
 	// fired when user pressed maker in cam
 	onMarkerSelected: function onMarkerSelectedFn(marker) {
-        document.location = "architectsdk://markerselected";
+
 		// deselect previous marker
 		if (World.currentMarker) {
 			if (World.currentMarker.poiData.id == marker.poiData.id) {
@@ -101,15 +102,15 @@ var World = {
 	// request POI data
 	requestDataFromLocal: function requestDataFromLocalFn(lat, lon) {
 
-		//var poisNearby = Helper.bringPlacesToUser(myJsonData, lat, lon);
-		//World.loadPoisFromJsonData(poisNearby);
+		var poisNearby = Helper.bringPlacesToUser(myJsonData, lat, lon);
+		World.loadPoisFromJsonData(poisNearby);
 
 		/*
 		For demo purpose they are relocated randomly around the user using a 'Helper'-function.
 		Comment out previous 2 lines and use the following line > instead < to use static values 1:1. 
 		*/
 
-		World.loadPoisFromJsonData(myJsonData);
+		// World.loadPoisFromJsonData(myJsonData);
 	}
 
 };
