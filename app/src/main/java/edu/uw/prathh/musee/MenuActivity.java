@@ -39,14 +39,8 @@ public class MenuActivity extends Activity {
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((MuSeeApp) getApplication()).getAccessToken() == null) {
-                    Intent getData = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse(VENMO_URL));
-                    startActivity(getData);
-                } else {
-                    Intent goToPay = new Intent(MenuActivity.this, DonateActivity.class);
-                    startActivity(goToPay);
-                }
+                Intent goToPay = new Intent(MenuActivity.this, DonateActivity.class);
+                startActivity(goToPay);
             }
         });
     }

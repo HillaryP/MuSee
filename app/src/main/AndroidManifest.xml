@@ -150,5 +150,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.uw.prathh.musee.MenuActivity" />
         </activity>
+        <activity
+            android:name=".donate.DonationPaymentInfoActivity"
+            android:label="@string/title_activity_donation_payment_info"
+            android:parentActivityName=".donate.DonateActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.donate.DonateActivity" />
+        </activity>
     </application>
+
 </manifest>
