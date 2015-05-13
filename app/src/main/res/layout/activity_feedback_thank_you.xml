@@ -22,7 +22,7 @@
 
     <TextView
         android:text="Thank you for your feedback about the Burke Museum!"
-        android:layout_width="270dp"
+        android:layout_width="220dp"
         android:layout_gravity="center"
         android:textSize="25dp"
         android:textColor="#F1654C"
