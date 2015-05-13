@@ -32,8 +32,6 @@ import edu.uw.prathh.musee.MuSeeApp;
 import edu.uw.prathh.musee.R;
 
 public class DonateConfirmAmount extends Activity {
-    public static final String URL_TEST = "https://sandbox-api.venmo.com/v1/payments";
-    //public static final String URL = "https://api.venmo.com/v1/payments";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +67,6 @@ public class DonateConfirmAmount extends Activity {
 
     public void runRequest(double amt) {
         Log.i("DonateThankYou", "Recip: 15555555555 " + amt);
-        new PaymentRequestTask().execute(URL_TEST, "" + amt, "15555555555"); //TODO: this.recipient);
     }
 
     @Override

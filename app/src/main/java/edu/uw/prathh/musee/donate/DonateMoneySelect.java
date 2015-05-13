@@ -22,13 +22,13 @@ public class DonateMoneySelect extends Activity {
         setContentView(R.layout.activity_donate_money_select);
         final EditText title = (EditText) findViewById(R.id.amount);
         title.setHint("$ _ _._ _");
-        final Button confirm = (Button) findViewById(R.id.next);
+        final ImageButton confirm = (ImageButton) findViewById(R.id.next);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle extras = new Bundle();
                 extras.putDouble("amt", Double.parseDouble(title.getText().toString()));
-                Intent confirmed = new Intent(DonateMoneySelect.this, DonateConfirmAmount.class);
+                Intent confirmed = new Intent(DonateMoneySelect.this, DonationPaymentInfoActivity.class);
                 confirmed.putExtras(extras);
                 startActivity(confirmed);
             }

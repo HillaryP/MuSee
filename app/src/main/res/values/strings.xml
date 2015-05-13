@@ -29,4 +29,5 @@
     <string name="radio_3">Seriously Cool</string>
     <string name="radio_4">Totes Awesome</string>
     <string name="btn_feedback">Submit</string>
+    <string name="title_activity_donation_payment_info">DonationPaymentInfoActivity</string>
 </resources>
