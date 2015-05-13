@@ -148,7 +148,7 @@ public class EventActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(EventActivity.this, "Fetching event data now!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(EventActivity.this, "Fetching event data now!", Toast.LENGTH_SHORT).show();
         }
 
         @Override
