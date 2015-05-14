@@ -16,8 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
@@ -30,6 +34,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -79,6 +85,8 @@ public class CameraActivity extends FragmentActivity implements
         if ( this.urlListener !=null ) {
             this.architectView.registerUrlListener( this.getUrlListener() );
         }
+
+        Toast.makeText(this, "Move your phone around to scan artifacts!", Toast.LENGTH_LONG);
     }
 
     @Override
@@ -278,6 +286,25 @@ public class CameraActivity extends FragmentActivity implements
             TextView description = (TextView) rootView.findViewById(R.id.description);
             description.setText("This is a test description!");
 
+            LinearLayout videoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.video);
+            ((ImageView) videoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.playbutton);
+            ((TextView) videoBox.findViewById(R.id.name)).setText("Origin Video");
+            ((TextView) videoBox.findViewById(R.id.sub_text)).setText("3 minutes");
+
+            LinearLayout musicBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.music);
+            ((ImageView) musicBox.findViewById(R.id.imageView)).setImageResource(R.drawable.music);
+            ((TextView) musicBox.findViewById(R.id.name)).setText("\"Chant\"");
+            ((TextView) musicBox.findViewById(R.id.sub_text)).setText("Artist");
+
+            LinearLayout photoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.photos);
+            ((ImageView) photoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.photos);
+            ((TextView) photoBox.findViewById(R.id.name)).setText("Gallery");
+            ((TextView) photoBox.findViewById(R.id.sub_text)).setText("5 photos");
+
+            LinearLayout shareBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.share);
+            ((ImageView) shareBox.findViewById(R.id.imageView)).setImageResource(R.drawable.share);
+            ((TextView) shareBox.findViewById(R.id.name)).setText("Share:");
+            ((TextView) shareBox.findViewById(R.id.sub_text)).setText("");
             return rootView;
         }
     }
