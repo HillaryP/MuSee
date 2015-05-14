@@ -34,15 +34,6 @@ public class MenuActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-        Button donate = (Button) findViewById(R.id.donate);
-        donate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToPay = new Intent(MenuActivity.this, DonateActivity.class);
-                startActivity(goToPay);
-            }
-        });
     }
 
     public void setUpList() {
@@ -55,7 +46,7 @@ public class MenuActivity extends Activity {
         menuItems.add(new MenuListItem("", "Accessibility", true));
         menuItems.add(new MenuListItem("", "Map", true));
         menuItems.add(new MenuListItem("", "Museum Feedback", true));
-        //menuItems.add(new MenuListItem("", "Donate to the Museum", true));
+        menuItems.add(new MenuListItem("", "Donate", true));
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(new ListItemAdapter(this, R.layout.list_item, menuItems));
     }

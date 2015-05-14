@@ -92,8 +92,8 @@ public class ListItemAdapter extends ArrayAdapter {
             case "MUSEUM FEEDBACK":
                 imageView.setImageResource(R.drawable.smallmenu6);
                 return new Intent(context, FeedbackActivity.class);
-            case "DONATE TO THE MUSEUM":
-                imageView.setImageResource(R.drawable.smallmenu1);
+            case "DONATE":
+                imageView.setImageResource(R.drawable.smallmenu9);
                 return new Intent(context, DonateActivity.class);
         };
         return new Intent(context, MenuActivity.class);
