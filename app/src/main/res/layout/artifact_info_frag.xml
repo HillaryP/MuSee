@@ -2,13 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffd1d1d1">
-    <TextView
+    android:background="#00d1d1d1"
+    android:weightSum="10">
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:text="YAYYYY"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textSize="20pt"
-        android:layout_weight="1" />
+        android:layout_weight="2"
+        android:gravity="right">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="YAYYYY"
+            android:textSize="20pt"
+            android:id="@+id/title"
+            android:textStyle="bold"
+            android:gravity="bottom|center_horizontal" />
+
+        <ImageButton
+            android:layout_width="91dp"
+            android:layout_height="86dp"
+            android:id="@+id/favorite"
+            android:src="@drawable/star_3"
+            android:layout_gravity="bottom" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="This is a test description! "
+        android:id="@+id/description"
+        android:layout_weight="2"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#ffe6e6e6" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/gridview"
+        android:layout_weight="5"
+        android:background="#ffe6e6e6"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#ffe6e6e6">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/info"
+            android:src="@drawable/info" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Questions or Comments?\nClick here to access the mobile site."
+            android:id="@+id/questions"
+            android:gravity="center_vertical|center_horizontal" />
+
+    </LinearLayout>
 </LinearLayout>

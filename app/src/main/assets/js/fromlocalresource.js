@@ -72,7 +72,7 @@ var World = {
 
 	// fired when user pressed maker in cam
 	onMarkerSelected: function onMarkerSelectedFn(marker) {
-        document.location = "architectsdk://markerselected?info=123"
+        document.location = "architectsdk://markerselected?title=" + marker.poiData.title;
 		// deselect previous marker
 		if (World.currentMarker) {
 			if (World.currentMarker.poiData.id == marker.poiData.id) {

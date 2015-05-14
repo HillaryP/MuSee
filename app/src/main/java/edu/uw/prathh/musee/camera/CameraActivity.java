@@ -230,6 +230,11 @@ public class CameraActivity extends FragmentActivity implements
                 // pressed "More" button on POI-detail panel
                 if ("markerselected".equalsIgnoreCase(invokedUri.getHost())) {
                     final ArtifactInfoFragment artifactInfo = new ArtifactInfoFragment();
+
+                    Bundle b = new Bundle();
+                    b.putString("poi", invokedUri.getQueryParameter("title").toString());
+                    artifactInfo.setArguments(b);
+
                     getSupportFragmentManager()
                             .beginTransaction()
                             .add(R.id.architect_view, artifactInfo)
@@ -244,6 +249,7 @@ public class CameraActivity extends FragmentActivity implements
      * Information fragment for artifact-specific information
      */
     public static class ArtifactInfoFragment extends Fragment {
+        String poiData;
 
         public ArtifactInfoFragment() { }
 
@@ -256,7 +262,8 @@ public class CameraActivity extends FragmentActivity implements
         public void onCreate(Bundle bundle) {
             super.onCreate(bundle);
             if (getArguments() != null) {
-
+                Log.i("ArtifactInfoFragment", "PoiData: " + getArguments().getString("poi"));
+                this.poiData = getArguments().getString("poi");
             }
         }
 
@@ -264,6 +271,13 @@ public class CameraActivity extends FragmentActivity implements
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.artifact_info_frag, container, false);
+
+            TextView title = (TextView) rootView.findViewById(R.id.title);
+            title.setText(this.poiData);
+
+            TextView description = (TextView) rootView.findViewById(R.id.description);
+            description.setText("This is a test description!");
+
             return rootView;
         }
     }
