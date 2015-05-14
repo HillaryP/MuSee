@@ -4,15 +4,33 @@ import android.app.Activity;
 import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.CalendarContract;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,6 +48,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Activity context;
     private Map<String, List<String>> eventCollections;
     private List<String> events;
+    private ImageView img;
 
     public ExpandableListAdapter(Activity context, List<String> events, Map<String, List<String>> eventCollections) {
         this.context = context;
@@ -128,13 +147,23 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String eventName = (String) getGroup(groupPosition);
+        String[] info = ((String) getGroup(groupPosition)).split(":::");
+        String eventName = "";
+        //String url = "";
+        if (info.length > 1) {
+            eventName = info[0];
+            //url = info[1];
+        }
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.group_item, null);
         }
         TextView item = (TextView) convertView.findViewById(R.id.event);
         item.setText(eventName);
+
+        //this.img = (ImageView) convertView.findViewById(R.id.event_img);
+        //new BitmapRequestTask().execute(url); //TODO - CONSIDER CHANGING ICON FOR EACH EVENT TYPE?
+
         return convertView;
     }
 
@@ -144,5 +173,39 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    private class BitmapRequestTask extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... uri) {
+            Bitmap bm = null;
+            try {
+                URL aURL = new URL(uri[0]);
+                URLConnection conn = aURL.openConnection();
+                conn.connect();
+                InputStream is = conn.getInputStream();
+                BufferedInputStream bis = new BufferedInputStream(is);
+                bm = BitmapFactory.decodeStream(bis);
+                bis.close();
+                is.close();
+            } catch (IOException e) {
+                Log.e("ExpandableListAdapter", "Error getting bitmap", e);
+            }
+            return bm;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            Log.i("EventActivity", "In Task Response: " + result);
+            if (result != null) {
+                img.setImageBitmap(result);
+            }
+        }
     }
 }

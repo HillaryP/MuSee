@@ -57,9 +57,9 @@ public class EventActivity extends Activity {
         Map<String, List<String>> collection = new LinkedHashMap<>();
         for (String event : result) {
             String[] nameAndRest = event.split(":::");
-            names.add(nameAndRest[0]);
+            names.add(nameAndRest[0] + ":::" + nameAndRest[1]);
             List<String> description = new ArrayList<>();
-            description.add(nameAndRest[1]);
+            description.add(nameAndRest[2]);
             collection.put(nameAndRest[0], description);
         }
 
@@ -84,7 +84,6 @@ public class EventActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-
         new InfoRequestTask().execute("http://www.burkemuseum.org/events/");
     }
 
@@ -128,15 +127,16 @@ public class EventActivity extends Activity {
                         for (Element e : events) {
                             String[] timeArray = e.getElementsByTag("h4").get(0).text().split("\\|");
                             String timeField = timeArray.length > 1 ? timeArray[1].trim() : "";
-                            Log.i("EventActivity", "Time field: " + timeField);
+                            String imageURL = e.getElementsByTag("img").get(0).attr("src");
+                            Log.i("EventActivity", "Image URL: " + imageURL);
                             String info = e.getElementsByTag("h2").text() + ":::"
+                                    + imageURL + ":::"
                                     + e.getElementsByClass("bk_event_day").attr("name").toString() + "\n"
                                     + e.getElementsByClass("bk_event_location").text() + "\n"
                                     + timeField + "\n"
                                     + e.getElementsByTag("p").text();
                             eventNames.add(info);
                         }
-                        Log.i("EventActivity", "In task Request: " + eventNames.toString());
                         return eventNames;
                     } else {
                         Log.e("EventActivity", "Status code: " + response.statusMessage());
