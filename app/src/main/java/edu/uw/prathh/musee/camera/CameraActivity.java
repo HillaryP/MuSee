@@ -1,6 +1,5 @@
 package edu.uw.prathh.musee.camera;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
@@ -15,14 +14,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
 
@@ -35,10 +36,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.io.FileOutputStream;
+import java.util.List;
 
 public class CameraActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -278,13 +276,23 @@ public class CameraActivity extends FragmentActivity implements
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.artifact_info_frag, container, false);
+            final View rootView = inflater.inflate(R.layout.artifact_info_frag, container, false);
 
             TextView title = (TextView) rootView.findViewById(R.id.title);
             title.setText(this.poiData);
 
-            TextView description = (TextView) rootView.findViewById(R.id.description);
-            description.setText("This is a test description!");
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Artifacts");
+            query.whereEqualTo("name", this.poiData);
+            query.findInBackground(new FindCallback<ParseObject>() {
+                public void done(List<ParseObject> information, ParseException e) {
+                    if (e == null) {
+                        TextView description = (TextView) rootView.findViewById(R.id.description);
+                        description.setText(information.get(0).getString("description"));
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
+                }
+            });
 
             LinearLayout videoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.video);
             ((ImageView) videoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.playbutton);

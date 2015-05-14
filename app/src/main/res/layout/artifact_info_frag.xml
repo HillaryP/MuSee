@@ -34,7 +34,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="This is a test description! "
+        android:text="Loading description..."
         android:id="@+id/description"
         android:layout_weight="2"
         android:gravity="center_vertical|center_horizontal"
