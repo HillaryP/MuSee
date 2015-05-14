@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
 
+import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
 
 public class DonationPaymentInfoActivity extends Activity {
@@ -24,7 +25,17 @@ public class DonationPaymentInfoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_payment_info);
         TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
-        title.setText("Pament Information");
+        title.setText("Payment Information");
+
+
+        ImageButton menuButton = (ImageButton) findViewById(R.id.header).findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DonationPaymentInfoActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        });
 
         final Double amount = getIntent().getExtras().getDouble("amt");
         TextView amountShow = (TextView) findViewById(R.id.amount_show);

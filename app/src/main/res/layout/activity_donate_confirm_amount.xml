@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.49"
+        android:textSize="50dp"
         android:id="@+id/amt"
+        android:textColor="#3E4652"
         android:gravity="center_vertical|center_horizontal" />
 
 
