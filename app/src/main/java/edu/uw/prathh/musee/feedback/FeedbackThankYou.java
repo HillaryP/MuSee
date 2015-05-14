@@ -20,10 +20,10 @@ public class FeedbackThankYou extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback_thank_you);
-        TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
-        title.setText("");
+        //TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
+        //title.setText("");
 
-        ImageButton menuButton = (ImageButton) findViewById(R.id.header).findViewById(R.id.menu_button);
+        ImageButton menuButton = (ImageButton) findViewById(R.id.menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
