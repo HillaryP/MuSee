@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
+
 
 public class ExhibitActivity extends Activity {
 
@@ -43,6 +45,14 @@ public class ExhibitActivity extends Activity {
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this));
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ExhibitActivity.this, ExhibitDetail.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
