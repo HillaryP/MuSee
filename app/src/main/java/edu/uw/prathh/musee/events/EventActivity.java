@@ -60,7 +60,7 @@ public class EventActivity extends Activity {
             names.add(nameAndRest[0] + ":::" + nameAndRest[1]);
             List<String> description = new ArrayList<>();
             description.add(nameAndRest[2]);
-            collection.put(nameAndRest[0], description);
+            collection.put(nameAndRest[0] + ":::" + nameAndRest[1], description);
         }
 
         expandableListView = (ExpandableListView) findViewById(R.id.event_list);
