@@ -126,10 +126,13 @@ public class EventActivity extends Activity {
                         Elements events = doc.select(".bk_event_listing");
                         List<String> eventNames = new ArrayList<>();
                         for (Element e : events) {
+                            String[] timeArray = e.getElementsByTag("h4").get(0).text().split("\\|");
+                            String timeField = timeArray.length > 1 ? timeArray[1].trim() : "";
+                            Log.i("EventActivity", "Time field: " + timeField);
                             String info = e.getElementsByTag("h2").text() + ":::"
                                     + e.getElementsByClass("bk_event_day").attr("name").toString() + "\n"
                                     + e.getElementsByClass("bk_event_location").text() + "\n"
-                                    + "6:00 - 9:00pm\n" // TODO - MAKE THIS DYNAMIC
+                                    + timeField + "\n"
                                     + e.getElementsByTag("p").text();
                             eventNames.add(info);
                         }
