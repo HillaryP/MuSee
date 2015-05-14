@@ -5,10 +5,17 @@
     android:orientation="vertical"
     tools:context="edu.uw.prathh.musee.donate.DonateThankYou">
 
-    <include layout="@layout/header_layout"
-        android:id="@+id/header"
-        />
+    <!--<include layout="@layout/header_layout"-->
+        <!--android:id="@+id/header"-->
+        <!--/>-->
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu_button"
+        android:padding="20dp"
+        android:background="@null"
+        android:src="@drawable/menuorange"/>
     <ImageView
         android:src="@drawable/checkmark"
         android:scaleType="fitCenter"
