@@ -13,11 +13,15 @@
         android:gravity="left">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:id="@+id/favorite"
-            android:background="@null"
-            android:src="@drawable/star"
+            android:background="@drawable/star_3"
+            android:adjustViewBounds="true"
+            android:maxHeight="20dp"
+            android:maxWidth="20dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="bottom" />
         <TextView
             android:layout_width="wrap_content"
@@ -25,6 +29,7 @@
             android:text="YAYYYY"
             android:textSize="20pt"
             android:textColor="#FF5237"
+            android:layout_marginLeft="10dp"
             android:id="@+id/title"
             android:textStyle="bold"
             android:gravity="bottom|center_horizontal" />
@@ -94,11 +99,12 @@
         android:background="#ffe6e6e6">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/info"
-            android:paddingLeft="10dp"
-            android:src="@drawable/information" />
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/info" />
 
         <TextView
             android:layout_width="fill_parent"

@@ -9,10 +9,9 @@
         android:layout_height="fill_parent"
         android:id="@+id/architect_view" />
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/menuwhite"
-        android:background="#90424242"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:background="@drawable/menu1"
         android:id="@+id/menu_button"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
