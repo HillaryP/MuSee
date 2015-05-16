@@ -9,24 +9,27 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="right">
+        android:layout_weight="2.3"
+        android:gravity="left">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/favorite"
+            android:background="@null"
+            android:src="@drawable/star"
+            android:layout_gravity="bottom" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="YAYYYY"
             android:textSize="20pt"
+            android:textColor="#FF5237"
             android:id="@+id/title"
             android:textStyle="bold"
             android:gravity="bottom|center_horizontal" />
 
-        <ImageButton
-            android:layout_width="91dp"
-            android:layout_height="86dp"
-            android:id="@+id/favorite"
-            android:src="@drawable/star_3"
-            android:layout_gravity="bottom" />
+
 
     </LinearLayout>
 
@@ -36,7 +39,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Loading description..."
         android:id="@+id/description"
-        android:layout_weight="2"
+        android:layout_weight="1.8"
         android:gravity="center_vertical|center_horizontal"
         android:background="#ffe6e6e6" />
 
@@ -94,7 +97,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info"
-            android:src="@drawable/info" />
+            android:paddingLeft="10dp"
+            android:src="@drawable/information" />
 
         <TextView
             android:layout_width="fill_parent"

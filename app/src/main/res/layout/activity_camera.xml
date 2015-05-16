@@ -11,10 +11,12 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/menu"
+        android:src="@drawable/menuwhite"
+        android:background="#90424242"
         android:id="@+id/menu_button"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"/>
+        android:padding="6dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="13dp"/>
 </RelativeLayout>
