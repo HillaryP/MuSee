@@ -2,6 +2,7 @@ package edu.uw.prathh.musee.camera;
 
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -295,21 +296,25 @@ public class CameraActivity extends FragmentActivity implements
             });
 
             LinearLayout videoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.video);
+            videoBox.setBackgroundColor(Color.parseColor("#F5F5F5"));
             ((ImageView) videoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.playbutton);
             ((TextView) videoBox.findViewById(R.id.name)).setText("Origin Video");
             ((TextView) videoBox.findViewById(R.id.sub_text)).setText("3 minutes");
 
             LinearLayout musicBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.music);
+            musicBox.setBackgroundColor(Color.parseColor("#D8D8D8"));
             ((ImageView) musicBox.findViewById(R.id.imageView)).setImageResource(R.drawable.music);
             ((TextView) musicBox.findViewById(R.id.name)).setText("\"Chant\"");
             ((TextView) musicBox.findViewById(R.id.sub_text)).setText("Artist");
 
             LinearLayout photoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.photos);
+            photoBox.setBackgroundColor(Color.parseColor("#EBEBEB"));
             ((ImageView) photoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.photos);
             ((TextView) photoBox.findViewById(R.id.name)).setText("Gallery");
             ((TextView) photoBox.findViewById(R.id.sub_text)).setText("5 photos");
 
             LinearLayout shareBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.share);
+            shareBox.setBackgroundColor(Color.parseColor("#E0E0E0"));
             ((ImageView) shareBox.findViewById(R.id.imageView)).setImageResource(R.drawable.share);
             ((TextView) shareBox.findViewById(R.id.name)).setText("Share:");
             ((TextView) shareBox.findViewById(R.id.sub_text)).setText("");
