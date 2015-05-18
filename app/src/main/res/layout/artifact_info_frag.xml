@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00d1d1d1"
+    android:background="#3E4653"
     android:weightSum="10">
+
+    <!--<ImageButton-->
+        <!--android:layout_width="35dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:background="@drawable/close"-->
+        <!--android:id="@+id/close_button"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:layout_weight=".15"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentRight="true"-->
+    <!--/>-->
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
+        android:paddingBottom="5dp"
         android:layout_weight="2.3"
         android:gravity="left">
 
         <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/favorite"
             android:background="@drawable/star_3"
             android:adjustViewBounds="true"
             android:maxHeight="20dp"
             android:maxWidth="20dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="10dp"
             android:layout_gravity="bottom" />
         <TextView
@@ -103,16 +117,19 @@
             android:layout_height="30dp"
             android:id="@+id/info"
             android:adjustViewBounds="true"
+            android:layout_marginTop="2dp"
             android:layout_marginLeft="30dp"
             android:background="@drawable/info" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Questions or Comments?\nClick here to access the mobile site."
             android:id="@+id/questions"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="left|center_horizontal" />
 
     </LinearLayout>
 </LinearLayout>
