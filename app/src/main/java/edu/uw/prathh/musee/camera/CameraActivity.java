@@ -278,6 +278,10 @@ public class CameraActivity extends FragmentActivity implements
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.artifact_info_frag, container, false);
+//            ImageButton button = (ImageButton) rootView.findViewById (R.id.menu_button);
+//            if(button != null) {
+//                button.setVisibility(View.GONE);
+//            }
 
             TextView title = (TextView) rootView.findViewById(R.id.title);
             title.setText(this.poiData);
