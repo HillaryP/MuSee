@@ -37,6 +37,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CameraActivity extends FragmentActivity implements
@@ -257,6 +258,8 @@ public class CameraActivity extends FragmentActivity implements
      */
     public static class ArtifactInfoFragment extends Fragment {
         String poiData;
+        String artifactId;
+        List<ParseObject> photoGallery;
 
         public ArtifactInfoFragment() { }
 
@@ -271,6 +274,7 @@ public class CameraActivity extends FragmentActivity implements
             if (getArguments() != null) {
                 Log.i("ArtifactInfoFragment", "PoiData: " + getArguments().getString("poi"));
                 this.poiData = getArguments().getString("poi");
+                this.photoGallery = new ArrayList<>();
             }
         }
 
@@ -286,43 +290,97 @@ public class CameraActivity extends FragmentActivity implements
             TextView title = (TextView) rootView.findViewById(R.id.title);
             title.setText(this.poiData);
 
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("Artifacts");
-            query.whereEqualTo("name", this.poiData);
-            query.findInBackground(new FindCallback<ParseObject>() {
-                public void done(List<ParseObject> information, ParseException e) {
-                    if (e == null) {
-                        TextView description = (TextView) rootView.findViewById(R.id.description);
-                        description.setText(information.get(0).getString("description"));
-                    } else {
-                        Log.d("score", "Error: " + e.getMessage());
-                    }
-                }
-            });
+            setUp(rootView);
 
             LinearLayout videoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.video);
             videoBox.setBackgroundColor(Color.parseColor("#F5F5F5"));
             ((ImageView) videoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.playbutton);
             ((TextView) videoBox.findViewById(R.id.name)).setText("Origin Video");
             ((TextView) videoBox.findViewById(R.id.sub_text)).setText("3 minutes");
+            videoBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO - make something happen
+                }
+            });
 
             LinearLayout musicBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.music);
             musicBox.setBackgroundColor(Color.parseColor("#D8D8D8"));
             ((ImageView) musicBox.findViewById(R.id.imageView)).setImageResource(R.drawable.music);
             ((TextView) musicBox.findViewById(R.id.name)).setText("\"Chant\"");
             ((TextView) musicBox.findViewById(R.id.sub_text)).setText("Artist");
+            musicBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO - make something happen
+                }
+            });
 
             LinearLayout photoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.photos);
             photoBox.setBackgroundColor(Color.parseColor("#EBEBEB"));
             ((ImageView) photoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.photos);
             ((TextView) photoBox.findViewById(R.id.name)).setText("Gallery");
-            ((TextView) photoBox.findViewById(R.id.sub_text)).setText("5 photos");
+            ((TextView) photoBox.findViewById(R.id.sub_text)).setText(photoGallery.size() + " photos");
+            photoBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO - make something happen
+                }
+            });
 
             LinearLayout shareBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.share);
             shareBox.setBackgroundColor(Color.parseColor("#E0E0E0"));
             ((ImageView) shareBox.findViewById(R.id.imageView)).setImageResource(R.drawable.share);
             ((TextView) shareBox.findViewById(R.id.name)).setText("Share:");
             ((TextView) shareBox.findViewById(R.id.sub_text)).setText("");
+            shareBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO - make something happen
+                }
+            });
             return rootView;
+        }
+
+        /*===============================Helper methods to populate media==========================*/
+
+        private void setUp(final View rootView) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Artifacts");
+            query.whereEqualTo("name", "Seahawks Mask"); //TODO - this.poiData);
+            query.findInBackground(new FindCallback<ParseObject>() {
+                public void done(List<ParseObject> information, ParseException e) {
+                    if (e == null) {
+                        TextView description = (TextView) rootView.findViewById(R.id.description);
+                        if (information.size() > 0) {
+                            artifactId = information.get(0).getObjectId();
+                            setUpPhoto(artifactId, rootView);
+                            description.setText(information.get(0).getString("description"));
+                        } else {
+                            description.setText("Artifact Media");
+                        }
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
+                }
+            });
+        }
+
+        private void setUpPhoto(String artifactId, final View rootView) {
+            ParseQuery<ParseObject> queryPhoto = ParseQuery.getQuery("ArtImages");
+            ParseObject obj = ParseObject.createWithoutData("Artifacts", artifactId);
+            queryPhoto.whereEqualTo("artifact_name", obj);
+            queryPhoto.findInBackground(new FindCallback<ParseObject>() {
+                public void done(List<ParseObject> information, ParseException e) {
+                    if (e == null) {
+                        photoGallery = information;
+                        LinearLayout photoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.photos);
+                        ((TextView) photoBox.findViewById(R.id.sub_text)).setText(photoGallery.size() + " photos");
+                        Log.i("CameraActivity", information.size() + " photos for this artifact");
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
+                }
+            });
         }
     }
 }
