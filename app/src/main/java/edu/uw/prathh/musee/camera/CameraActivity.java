@@ -253,6 +253,19 @@ public class CameraActivity extends FragmentActivity implements
         };
     }
 
+    /* ================================Fragment specific methods=================================*/
+    public void openGallery() {
+        Log.i("CameraActivity", "openGallery called");
+        final GalleryFragment gallery = new GalleryFragment();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.architect_view, gallery)
+                .addToBackStack(null).commit();
+    }
+
+    /* =========================================Fragments========================================*/
+
     /**
      * Information fragment for artifact-specific information
      */
@@ -324,7 +337,7 @@ public class CameraActivity extends FragmentActivity implements
             photoBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO - make something happen
+                    ((CameraActivity)getActivity()).openGallery();
                 }
             });
 
@@ -381,6 +394,38 @@ public class CameraActivity extends FragmentActivity implements
                     }
                 }
             });
+        }
+    }
+
+    /**
+     * Information fragment for artifact-specific information
+     */
+    public static class GalleryFragment extends Fragment {
+        String poiData;
+        String artifactId;
+        List<ParseObject> photoGallery;
+
+        public GalleryFragment() {
+        }
+
+        public static GalleryFragment newInstance() {
+            GalleryFragment f = new GalleryFragment();
+            return f;
+        }
+
+        @Override
+        public void onCreate(Bundle bundle) {
+            super.onCreate(bundle);
+            if (getArguments() != null) {
+                Log.i("ArtifactInfoFragment", "PoiData: " + getArguments().getString("poi"));
+            }
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            final View rootView = inflater.inflate(R.layout.gallery_frag, container, false);
+            return rootView;
         }
     }
 }
