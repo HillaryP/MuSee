@@ -6,12 +6,12 @@
     tools:context="edu.uw.prathh.musee.events.EventActivity">
     <include layout="@layout/header_layout"
         android:id="@+id/header"
-        android:layout_height="160dp"
+        android:layout_height="130dp"
         android:layout_width="fill_parent" />
     <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.5"
+        android:layout_weight=".7"
         android:id="@+id/event_list">
     </ExpandableListView>
 </LinearLayout>

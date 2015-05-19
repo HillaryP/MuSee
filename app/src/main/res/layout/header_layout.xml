@@ -8,19 +8,31 @@
     android:padding="16dp"
     android:nestedScrollingEnabled="true">
 
+    <!--<ImageButton-->
+        <!--android:background="#3F4752"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/menuorange"-->
+        <!--android:id="@+id/menu_button"-->
+        <!--android:layout_weight="2"-->
+        <!--/>-->
+
+
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/roundmenu1"
+        android:layout_width="34dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/menu_button"
-        android:layout_weight="2"
-        android:background="#3F4752"
-        android:src="@drawable/menuorange"/>
+        android:layout_weight="1.7"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title"
         android:textStyle="bold"
-        android:layout_weight=".5"
+        android:layout_marginTop="15dp"
+        android:layout_weight=".7"
         android:textColor="#FF5237"
         android:textSize="30dp"
         android:text="Dummy Title"/>
