@@ -63,7 +63,10 @@ public class FeedbackActivity extends Activity {
             public void onClick(View v) {
                 int selectedId = radioFeedbackGroup.getCheckedRadioButtonId();
                 radioFeedbackButton = (RadioButton) findViewById(selectedId);
-                radioFeedbackButton.setBackgroundResource(R.drawable.checked);
+                radioFeedbackButton.setBackgroundResource(R.drawable.checkedlarge);
+                radioFeedbackButton.setWidth(34);
+                radioFeedbackButton.setHeight(34);
+
                 Log.i("Feedback Activity", "Button has been clicked");
 
                 RadioButton rb = (RadioButton) radioFeedbackGroup.findViewById(radioFeedbackGroup.getCheckedRadioButtonId());
