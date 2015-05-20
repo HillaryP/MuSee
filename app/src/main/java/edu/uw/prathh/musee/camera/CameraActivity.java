@@ -1,11 +1,17 @@
 package edu.uw.prathh.musee.camera;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.location.Location;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -247,6 +253,7 @@ public class CameraActivity extends FragmentActivity implements
                     getSupportFragmentManager()
                             .beginTransaction()
                             .add(R.id.architect_view, artifactInfo)
+                            .addToBackStack(null)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                 }
                 return true;
@@ -277,6 +284,8 @@ public class CameraActivity extends FragmentActivity implements
         String poiData;
         String artifactId;
         String url;
+        String audioUrl;
+        static MediaPlayer mediaPlayer; //TODO - This should not be static
 
         public ArtifactInfoFragment() { }
 
@@ -291,6 +300,7 @@ public class CameraActivity extends FragmentActivity implements
             if (getArguments() != null) {
                 Log.i("ArtifactInfoFragment", "PoiData: " + getArguments().getString("poi"));
                 this.poiData = getArguments().getString("poi");
+                mediaPlayer = new MediaPlayer();
             }
         }
 
@@ -308,6 +318,7 @@ public class CameraActivity extends FragmentActivity implements
 
             setUp(rootView);
 
+            // Set up the video box
             LinearLayout videoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.video);
             videoBox.setBackgroundColor(Color.parseColor("#F5F5F5"));
             ((ImageView) videoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.playbutton);
@@ -318,18 +329,29 @@ public class CameraActivity extends FragmentActivity implements
                 }
             });
 
+            // Set up the music box
             LinearLayout musicBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.music);
             musicBox.setBackgroundColor(Color.parseColor("#D8D8D8"));
             ((ImageView) musicBox.findViewById(R.id.imageView)).setImageResource(R.drawable.music);
-            ((TextView) musicBox.findViewById(R.id.name)).setText("\"Chant\"");
-            ((TextView) musicBox.findViewById(R.id.sub_text)).setText("Artist");
             musicBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO - make something happen
+                    try {
+                        String url = audioUrl;
+                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        mediaPlayer.setDataSource(url);
+                        DialogFragment newFragment = new MediaPauseDialogFragment();
+                        newFragment.show(getFragmentManager(), "media");
+                        mediaPlayer.prepare();
+                        mediaPlayer.start();
+                    } catch (Exception e) {
+                        Log.e("CameraActivity", e.getLocalizedMessage());
+                        Toast.makeText(rootView.getContext(), "This audio file is not supported", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
 
+            // Set up the photo box
             LinearLayout photoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.photos);
             photoBox.setBackgroundColor(Color.parseColor("#EBEBEB"));
             ((ImageView) photoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.photos);
@@ -343,6 +365,7 @@ public class CameraActivity extends FragmentActivity implements
                 }
             });
 
+            // Set up the share box
             LinearLayout shareBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.share);
             shareBox.setBackgroundColor(Color.parseColor("#E0E0E0"));
             ((ImageView) shareBox.findViewById(R.id.imageView)).setImageResource(R.drawable.share);
@@ -367,10 +390,12 @@ public class CameraActivity extends FragmentActivity implements
                     if (e == null) {
                         TextView description = (TextView) rootView.findViewById(R.id.description);
                         LinearLayout videoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.video);
+                        LinearLayout musicBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.music);
                         if (information.size() > 0) {
                             artifactId = information.get(0).getObjectId();
                             setUpPhoto(artifactId, rootView);
                             description.setText(information.get(0).getString("description"));
+
                             int length = information.get(0).getInt("video_length");
                             if (length != 0) {
                                 ((TextView) videoBox.findViewById(R.id.sub_text)).setText(
@@ -384,6 +409,20 @@ public class CameraActivity extends FragmentActivity implements
                                 ((TextView) videoBox.findViewById(R.id.name)).setText("Video");
                             } else {
                                 ((TextView) videoBox.findViewById(R.id.name)).setText(videoName);
+                            }
+
+                            audioUrl = information.get(0).getString("music_url");
+                            String audioName = information.get(0).getString("music_name");
+                            if (audioName == null || audioName.length() == 0) {
+                                ((TextView) musicBox.findViewById(R.id.name)).setText("Audio");
+                            } else {
+                                ((TextView) musicBox.findViewById(R.id.name)).setText(audioName);
+                            }
+                            String audioArtist = information.get(0).getString("music_artist");
+                            if (audioArtist == null || audioArtist.length() == 0) {
+                                ((TextView) musicBox.findViewById(R.id.sub_text)).setText("Unknown Artist");
+                            } else {
+                                ((TextView) musicBox.findViewById(R.id.sub_text)).setText(audioArtist);
                             }
                         } else {
                             description.setText("Artifact Media");
@@ -410,6 +449,22 @@ public class CameraActivity extends FragmentActivity implements
                     }
                 }
             });
+        }
+
+        public static class MediaPauseDialogFragment extends DialogFragment {
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                // Use the Builder class for convenient dialog construction
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Currently playing audio")
+                        .setPositiveButton("Stop", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                mediaPlayer.stop();
+                            }
+                        });
+                // Create the AlertDialog object and return it
+                return builder.create();
+            }
         }
     }
 }
