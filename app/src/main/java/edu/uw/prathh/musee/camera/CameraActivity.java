@@ -312,12 +312,10 @@ public class CameraActivity extends FragmentActivity implements
             LinearLayout videoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.video);
             videoBox.setBackgroundColor(Color.parseColor("#F5F5F5"));
             ((ImageView) videoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.playbutton);
-            ((TextView) videoBox.findViewById(R.id.name)).setText("Origin Video");
-            ((TextView) videoBox.findViewById(R.id.sub_text)).setText("3 minutes");
             videoBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO - make something happen
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=JU6zLz3lNJ8")));
                 }
             });
 
@@ -364,15 +362,20 @@ public class CameraActivity extends FragmentActivity implements
 
         private void setUp(final View rootView) {
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Artifacts");
-            query.whereEqualTo("name", "Seahawks Mask"); //TODO - this.poiData);
+            query.whereEqualTo("name", this.poiData);
             query.findInBackground(new FindCallback<ParseObject>() {
                 public void done(List<ParseObject> information, ParseException e) {
                     if (e == null) {
                         TextView description = (TextView) rootView.findViewById(R.id.description);
+                        LinearLayout videoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.video);
                         if (information.size() > 0) {
                             artifactId = information.get(0).getObjectId();
                             setUpPhoto(artifactId, rootView);
                             description.setText(information.get(0).getString("description"));
+                            ((TextView) videoBox.findViewById(R.id.sub_text)).setText(
+                                    information.get(0).getInt("video_length") + " minutes");
+                            ((TextView) videoBox.findViewById(R.id.name)).setText(
+                                    information.get(0).getString("video_name"));
                         } else {
                             description.setText("Artifact Media");
                         }
