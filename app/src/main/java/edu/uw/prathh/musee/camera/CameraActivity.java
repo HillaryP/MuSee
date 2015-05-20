@@ -30,6 +30,7 @@ import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
 
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
+import edu.uw.prathh.musee.media.GalleryFragment;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -254,9 +255,12 @@ public class CameraActivity extends FragmentActivity implements
     }
 
     /* ================================Fragment specific methods=================================*/
-    public void openGallery() {
+    public void openGallery(String id) {
         Log.i("CameraActivity", "openGallery called");
         final GalleryFragment gallery = new GalleryFragment();
+        Bundle b = new Bundle();
+        b.putString("artifactId", id);
+        gallery.setArguments(b);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -337,7 +341,7 @@ public class CameraActivity extends FragmentActivity implements
             photoBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((CameraActivity)getActivity()).openGallery();
+                    ((CameraActivity)getActivity()).openGallery(artifactId);
                 }
             });
 
@@ -394,38 +398,6 @@ public class CameraActivity extends FragmentActivity implements
                     }
                 }
             });
-        }
-    }
-
-    /**
-     * Information fragment for artifact-specific information
-     */
-    public static class GalleryFragment extends Fragment {
-        String poiData;
-        String artifactId;
-        List<ParseObject> photoGallery;
-
-        public GalleryFragment() {
-        }
-
-        public static GalleryFragment newInstance() {
-            GalleryFragment f = new GalleryFragment();
-            return f;
-        }
-
-        @Override
-        public void onCreate(Bundle bundle) {
-            super.onCreate(bundle);
-            if (getArguments() != null) {
-                Log.i("ArtifactInfoFragment", "PoiData: " + getArguments().getString("poi"));
-            }
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            final View rootView = inflater.inflate(R.layout.gallery_frag, container, false);
-            return rootView;
         }
     }
 }
