@@ -276,7 +276,7 @@ public class CameraActivity extends FragmentActivity implements
     public static class ArtifactInfoFragment extends Fragment {
         String poiData;
         String artifactId;
-        List<ParseObject> photoGallery;
+        String url;
 
         public ArtifactInfoFragment() { }
 
@@ -291,7 +291,6 @@ public class CameraActivity extends FragmentActivity implements
             if (getArguments() != null) {
                 Log.i("ArtifactInfoFragment", "PoiData: " + getArguments().getString("poi"));
                 this.poiData = getArguments().getString("poi");
-                this.photoGallery = new ArrayList<>();
             }
         }
 
@@ -315,7 +314,7 @@ public class CameraActivity extends FragmentActivity implements
             videoBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=JU6zLz3lNJ8")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 }
             });
 
@@ -335,7 +334,7 @@ public class CameraActivity extends FragmentActivity implements
             photoBox.setBackgroundColor(Color.parseColor("#EBEBEB"));
             ((ImageView) photoBox.findViewById(R.id.imageView)).setImageResource(R.drawable.photos);
             ((TextView) photoBox.findViewById(R.id.name)).setText("Gallery");
-            ((TextView) photoBox.findViewById(R.id.sub_text)).setText(photoGallery.size() + " photos");
+            ((TextView) photoBox.findViewById(R.id.sub_text)).setText("0 photos");
             photoBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -372,10 +371,20 @@ public class CameraActivity extends FragmentActivity implements
                             artifactId = information.get(0).getObjectId();
                             setUpPhoto(artifactId, rootView);
                             description.setText(information.get(0).getString("description"));
-                            ((TextView) videoBox.findViewById(R.id.sub_text)).setText(
-                                    information.get(0).getInt("video_length") + " minutes");
-                            ((TextView) videoBox.findViewById(R.id.name)).setText(
-                                    information.get(0).getString("video_name"));
+                            int length = information.get(0).getInt("video_length");
+                            if (length != 0) {
+                                ((TextView) videoBox.findViewById(R.id.sub_text)).setText(
+                                        length + " minutes");
+                            } else {
+                                ((TextView) videoBox.findViewById(R.id.sub_text)).setText("");
+                            }
+                            url = information.get(0).getString("video_url");
+                            String videoName = information.get(0).getString("video_name");
+                            if (videoName == null || videoName.length() == 0) {
+                                ((TextView) videoBox.findViewById(R.id.name)).setText("Video");
+                            } else {
+                                ((TextView) videoBox.findViewById(R.id.name)).setText(videoName);
+                            }
                         } else {
                             description.setText("Artifact Media");
                         }
@@ -393,9 +402,8 @@ public class CameraActivity extends FragmentActivity implements
             queryPhoto.findInBackground(new FindCallback<ParseObject>() {
                 public void done(List<ParseObject> information, ParseException e) {
                     if (e == null) {
-                        photoGallery = information;
                         LinearLayout photoBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.photos);
-                        ((TextView) photoBox.findViewById(R.id.sub_text)).setText(photoGallery.size() + " photos");
+                        ((TextView) photoBox.findViewById(R.id.sub_text)).setText(information.size() + " photos");
                         Log.i("CameraActivity", information.size() + " photos for this artifact");
                     } else {
                         Log.d("score", "Error: " + e.getMessage());
