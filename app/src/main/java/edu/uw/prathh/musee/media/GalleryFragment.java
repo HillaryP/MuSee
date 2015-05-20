@@ -1,5 +1,7 @@
 package edu.uw.prathh.musee.media;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -24,6 +28,7 @@ import edu.uw.prathh.musee.R;
  * Information fragment for artifact-specific information
  */
 public class GalleryFragment extends Fragment {
+    private String id;
     private List<ParseObject> imageList;
 
     public GalleryFragment() {
@@ -38,34 +43,45 @@ public class GalleryFragment extends Fragment {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         if (getArguments() != null) {
-            Log.i("ArtifactInfoFragment", "PoiData: " + getArguments().getString("poi"));
-            String id = getArguments().getString("id");
-            ParseQuery<ParseObject> queryPhoto = ParseQuery.getQuery("ArtImages");
-            ParseObject obj = ParseObject.createWithoutData("Artifacts", id);
-            queryPhoto.whereEqualTo("artifact_name", obj);
-            queryPhoto.findInBackground(new FindCallback<ParseObject>() {
-                public void done(List<ParseObject> information, ParseException e) {
-                    if (e == null) {
-                        imageList = information;
-                        Log.i("CameraActivity", information.size() + " photos for this artifact");
-                    } else {
-                        Log.d("score", "Error: " + e.getMessage());
-                    }
-                }
-            });
+            Log.i("GalleryFragment", "ArtifactId: " + getArguments().getString("artifactId"));
+            this.id = getArguments().getString("artifactId");
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.gallery_frag, container, false);
-        TextView first = (TextView) rootView.findViewById(R.id.first);
-        first.setText(imageList.get(0).get("image").toString());
-        TextView second = (TextView) rootView.findViewById(R.id.second);
-        second.setText(imageList.get(1).get("image").toString());
-        TextView third = (TextView) rootView.findViewById(R.id.third);
-        third.setText(imageList.get(2).get("image").toString());
+
+        ParseQuery<ParseObject> queryPhoto = ParseQuery.getQuery("ArtImages");
+        ParseObject obj = ParseObject.createWithoutData("Artifacts", this.id);
+        queryPhoto.whereEqualTo("artifact_name", obj);
+        queryPhoto.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> information, ParseException e) {
+                if (e == null) {
+                    imageList = information;
+
+                    final LinearLayout layout = (LinearLayout) rootView.findViewById(R.id.layout);
+                    for (ParseObject image : imageList) {
+                        ParseFile parseFile = (ParseFile) image.get("image");
+                        parseFile.getDataInBackground(new GetDataCallback() {
+                            @Override
+                            public void done(byte[] bytes, ParseException e) {
+                                ImageView first = new ImageView(rootView.getContext());
+                                first.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                first.setImageBitmap(bmp);
+                                layout.addView(first);
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
         return rootView;
     }
 }

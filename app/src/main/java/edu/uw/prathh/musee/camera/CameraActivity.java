@@ -341,6 +341,7 @@ public class CameraActivity extends FragmentActivity implements
             photoBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.i("CameraActivity", "ID: " + artifactId);
                     ((CameraActivity)getActivity()).openGallery(artifactId);
                 }
             });

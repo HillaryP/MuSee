@@ -3,17 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.uw.prathh.musee.media.GalleryFragment">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/first"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/second"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/third"/>
+    tools:context="edu.uw.prathh.musee.media.GalleryFragment"
+    android:background="#ffffffff"
+    android:id="@+id/layout">
 </LinearLayout>
