@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#3F4752">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="120dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/inside_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:background="@drawable/tutorial_2_shape" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/camera"/>
+        
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:layout_centerHorizontal="true"
+            android:text="Swipe left to start using the camera view to scan artifacts."
+            android:textColor="#FFFFFF"
+            android:textSize="23dp"
+            android:lineSpacingExtra="5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="250dp"
+            android:src="@drawable/getstarted"/>
+    </RelativeLayout>
+</LinearLayout>
