@@ -27,6 +27,7 @@ import edu.uw.prathh.musee.feedback.FeedbackActivity;
 import edu.uw.prathh.musee.info.AccessibilityActivity;
 import edu.uw.prathh.musee.info.FavoritesActivity;
 import edu.uw.prathh.musee.info.MapActivity;
+import edu.uw.prathh.musee.media.ArtifactInfoFragment;
 
 public class ListItemAdapter extends ArrayAdapter {
     private int resource;
