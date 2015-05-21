@@ -47,7 +47,7 @@ public class MuSeeApp extends Application {
 
     public void addToFavorites(String artifactName) {
         SharedPreferences.Editor editor = prefs.edit();
-        Set<String> favorites = new HashSet<>(prefs.getStringSet("list", null));
+        Set<String> favorites = new HashSet<>(prefs.getStringSet("list", new HashSet<String>()));
         favorites.add(artifactName);
         editor.putStringSet("list", favorites);
         editor.apply();
@@ -55,7 +55,7 @@ public class MuSeeApp extends Application {
 
     public void removeFromFavorites(String artifactName) {
         SharedPreferences.Editor editor = prefs.edit();
-        Set<String> favorites = new HashSet<>(prefs.getStringSet("list", null));
+        Set<String> favorites = new HashSet<>(prefs.getStringSet("list", new HashSet<String>()));
         favorites.remove(artifactName);
         editor.putStringSet("list", favorites);
         editor.apply();
