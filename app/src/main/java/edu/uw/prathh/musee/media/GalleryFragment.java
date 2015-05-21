@@ -2,14 +2,17 @@ package edu.uw.prathh.musee.media;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
@@ -29,6 +32,7 @@ import edu.uw.prathh.musee.R;
 public class GalleryFragment extends Fragment {
     private String id;
     private List<ParseObject> imageList;
+
 
     public GalleryFragment() {
     }
@@ -63,15 +67,48 @@ public class GalleryFragment extends Fragment {
                     final LinearLayout layout = (LinearLayout) rootView.findViewById(R.id.layout);
                     for (ParseObject image : imageList) {
                         ParseFile parseFile = (ParseFile) image.get("image");
+                        final String parseText = image.getString("name");
+                        final String parseDescription = image.getString("description");
                         parseFile.getDataInBackground(new GetDataCallback() {
                             @Override
                             public void done(byte[] bytes, ParseException e) {
                                 ImageView first = new ImageView(rootView.getContext());
-                                first.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
+                                first.setLayoutParams(new ViewGroup.LayoutParams(800, 1150));
+                                first.setScaleType(ImageView.ScaleType.FIT_XY);
                                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                                LinearLayout layoutOne = new LinearLayout(rootView.getContext());
+                                layoutOne.setOrientation(LinearLayout.VERTICAL);
+                                TextView comment = new TextView(rootView.getContext());
+                                TextView description= new TextView(rootView.getContext());
+                                comment.setText(parseText);
+                                description.setText(parseDescription);
+                                comment.setTextSize(20);
+                                description.setTextSize(13);
+
+                                first.setPadding(0, 0, 0, 0);
+                                comment.setPadding(10,10,10,10);
+                                description.setPadding(10,10,10,10);
+
                                 first.setImageBitmap(bmp);
-                                layout.addView(first);
+                                comment.setGravity(Gravity.TOP);
+                                comment.setTextColor(Color.WHITE);
+                                description.setTextColor(Color.WHITE);
+                                comment.setBackgroundColor(Color.parseColor("#3E4653"));
+                                description.setBackgroundColor(Color.parseColor("#3E4653"));
+                                first.setBackgroundColor(Color.parseColor("#3E4653"));
+                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                layoutParams.setMargins(10,300,10,150);
+
+                                layoutOne.setLayoutParams(layoutParams);
+                                layoutOne.setPadding(0,0,0,0);
+//                                layoutOne.setPadding(left,top,right,bottom);
+                                // adding image & comment to layoutOne, then adding to layout
+                                layoutOne.addView(first);
+                                layoutOne.addView(comment);
+                                layoutOne.addView(description);
+                                layout.addView(layoutOne);
+
                             }
                         });
                     }
