@@ -38,15 +38,15 @@ public class MenuActivity extends Activity {
 
     public void setUpList() {
         List<MenuListItem> menuItems = new ArrayList<>();
-        menuItems.add(new MenuListItem("", "scan artifacts"));
-        menuItems.add(new MenuListItem("", "favorites"));
-        menuItems.add(new MenuListItem("", "Exhibits"));
-        menuItems.add(new MenuListItem("", "Events"));
+        menuItems.add(new MenuListItem("scan artifacts"));
+        menuItems.add(new MenuListItem("favorites"));
+        menuItems.add(new MenuListItem("Exhibits"));
+        menuItems.add(new MenuListItem("Events"));
         //menuItems.add(new MenuListItem("", "Museum Info", true));
-        menuItems.add(new MenuListItem("", "Accessibility", true));
-        menuItems.add(new MenuListItem("", "Map", true));
-        menuItems.add(new MenuListItem("", "Museum Feedback", true));
-        menuItems.add(new MenuListItem("", "Donate", true));
+        menuItems.add(new MenuListItem("Accessibility"));
+        menuItems.add(new MenuListItem("Map"));
+        menuItems.add(new MenuListItem("Museum Feedback"));
+        menuItems.add(new MenuListItem("Donate"));
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(new ListItemAdapter(this, R.layout.list_item, menuItems));
     }

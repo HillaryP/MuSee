@@ -6,10 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -35,6 +37,7 @@ import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
 
 import edu.uw.prathh.musee.MenuActivity;
+import edu.uw.prathh.musee.MuSeeApp;
 import edu.uw.prathh.musee.R;
 import edu.uw.prathh.musee.media.GalleryFragment;
 
@@ -278,6 +281,28 @@ public class CameraActivity extends FragmentActivity implements
                 .addToBackStack(null).commit();
     }
 
+    public void addFavorite(ImageButton button, String name) {
+        boolean isFilled = ((MuSeeApp) getApplication()).getFavorites().contains(name);
+        Log.i("CameraActivity", "Before: " + ((MuSeeApp) getApplication()).getFavorites().toString());
+        if (isFilled) {
+            ((MuSeeApp) getApplication()).removeFromFavorites(name);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                button.setBackgroundResource(R.drawable.star);
+            } else {
+                button.setBackground(getResources().getDrawable(R.drawable.star));
+            }
+        } else {
+            ((MuSeeApp) getApplication()).addToFavorites(name);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                button.setBackgroundResource(R.drawable.filledstar);
+            } else {
+                button.setBackground(getResources().getDrawable(R.drawable.filledstar));
+            }
+        }
+
+        Log.i("CameraActivity", "After: " + ((MuSeeApp) getApplication()).getFavorites().toString());
+    }
+
     /* =========================================Fragments========================================*/
 
     /**
@@ -314,6 +339,21 @@ public class CameraActivity extends FragmentActivity implements
 
             TextView title = (TextView) rootView.findViewById(R.id.title);
             title.setText(this.poiData);
+
+            final ImageButton favorite = (ImageButton) rootView.findViewById(R.id.favorite);
+            if (((MuSeeApp) getActivity().getApplication()).getFavorites().contains(this.poiData)) {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    favorite.setBackgroundResource(R.drawable.filledstar);
+                } else {
+                    favorite.setBackground(getResources().getDrawable(R.drawable.filledstar));
+                }
+            }
+            favorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((CameraActivity)getActivity()).addFavorite(favorite, poiData);
+                }
+            });
 
             setUp(rootView);
 

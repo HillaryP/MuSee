@@ -5,4 +5,11 @@
     tools:context="edu.uw.prathh.musee.info.FavoritesActivity">
     <include layout="@layout/header_layout"
         android:id="@+id/header" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="20.0sp"
+        android:id="@+id/list_view" />
 </LinearLayout>

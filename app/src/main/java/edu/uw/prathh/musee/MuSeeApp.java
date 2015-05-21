@@ -1,13 +1,14 @@
 package edu.uw.prathh.musee;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.parse.Parse;
-import com.parse.ParseObject;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hillaryprather on 3/7/15.
@@ -37,6 +38,26 @@ public class MuSeeApp extends Application {
         Log.i("ChangeApp", "Access token set to: " + token);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("accessToken", token);
+        editor.apply();
+    }
+
+    public Set<String> getFavorites() {
+        return prefs.getStringSet("list", null);
+    }
+
+    public void addToFavorites(String artifactName) {
+        SharedPreferences.Editor editor = prefs.edit();
+        Set<String> favorites = new HashSet<>(prefs.getStringSet("list", null));
+        favorites.add(artifactName);
+        editor.putStringSet("list", favorites);
+        editor.apply();
+    }
+
+    public void removeFromFavorites(String artifactName) {
+        SharedPreferences.Editor editor = prefs.edit();
+        Set<String> favorites = new HashSet<>(prefs.getStringSet("list", null));
+        favorites.remove(artifactName);
+        editor.putStringSet("list", favorites);
         editor.apply();
     }
 }

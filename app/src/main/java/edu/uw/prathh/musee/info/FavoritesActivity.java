@@ -7,9 +7,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.uw.prathh.musee.ListItemAdapter;
 import edu.uw.prathh.musee.MenuActivity;
+import edu.uw.prathh.musee.MenuListItem;
+import edu.uw.prathh.musee.MuSeeApp;
 import edu.uw.prathh.musee.R;
 
 public class FavoritesActivity extends Activity {
@@ -21,6 +28,7 @@ public class FavoritesActivity extends Activity {
         TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
         title.setText("Favorites");
 
+        setUpList();
         ImageButton menuButton = (ImageButton) findViewById(R.id.menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +37,15 @@ public class FavoritesActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void setUpList() {
+        List<MenuListItem> menuItems = new ArrayList<>();
+        for (String favorite : ((MuSeeApp) getApplication()).getFavorites()) {
+            menuItems.add(new MenuListItem(favorite));
+        }
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        listView.setAdapter(new ListItemAdapter(this, R.layout.list_item, menuItems));
     }
 
 
