@@ -25,8 +25,6 @@ public class MuSeeApp extends Application {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "0gdTYz0qLwmWSo1X1R7f0BySH5RUpw7X2gkzJPRC", "SVheNhubmxUkEprZ67RObXf98rdU7KRKSN7WL61y");
-
         Log.i("MuSeeApp", "Application created");
     }
 
@@ -42,7 +40,7 @@ public class MuSeeApp extends Application {
     }
 
     public Set<String> getFavorites() {
-        return prefs.getStringSet("list", null);
+        return prefs.getStringSet("list", new HashSet<String>());
     }
 
     public void addToFavorites(String artifactName) {
