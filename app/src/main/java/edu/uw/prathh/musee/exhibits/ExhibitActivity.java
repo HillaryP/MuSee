@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -43,13 +44,20 @@ public class ExhibitActivity extends Activity {
             }
         });
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
+        final GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String exhibitName = (String)(gridview.getItemAtPosition(position));
+              //  Log.i("Exhibit Activity", gridview.toString());
+              //  Log.i("Exhibit Activity", exhibitName);
+                Bundle bundle = new Bundle();
+                bundle.putString("Exhibit", exhibitName);
                 Intent intent = new Intent(ExhibitActivity.this, ExhibitDetail.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
