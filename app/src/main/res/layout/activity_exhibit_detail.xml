@@ -5,4 +5,11 @@
     tools:context="edu.uw.prathh.musee.exhibits.ExhibitDetail">
     <include layout="@layout/header_layout"
         android:id="@+id/header" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/description"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

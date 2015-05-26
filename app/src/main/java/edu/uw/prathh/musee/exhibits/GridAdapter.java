@@ -58,7 +58,8 @@ public class GridAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        return null;
+        return exhibits[position];
+
     }
 
     public long getItemId(int position) {

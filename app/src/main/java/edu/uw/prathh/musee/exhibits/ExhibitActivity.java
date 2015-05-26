@@ -51,7 +51,7 @@ public class ExhibitActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String exhibitName = (String)(gridview.getItemAtPosition(position));
+                String exhibitName = (String)gridview.getItemAtPosition(position);
               //  Log.i("Exhibit Activity", gridview.toString());
               //  Log.i("Exhibit Activity", exhibitName);
                 Bundle bundle = new Bundle();

@@ -14,6 +14,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
+
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
 
@@ -41,6 +49,18 @@ public class ExhibitDetail extends Activity {
      //   Log.i("Exhibit Detail", exhibitName);
 
         title.setText(exhibitName);
+
+        ParseQuery<ParseObject> queryEvent = ParseQuery.getQuery("Exhibits");
+        queryEvent.whereEqualTo("name", exhibitName);
+        queryEvent.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> exhibitDes, ParseException e) {
+                //String exDesc = exhibitDes.getString("description");
+                //TextView description = (TextView) findViewById(R.id.header).findViewById(R.id.description);
+                //Log.i("Exhibit Description", exDesc);
+            }
+        });
+
     }
 
 
