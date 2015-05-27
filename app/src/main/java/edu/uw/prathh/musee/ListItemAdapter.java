@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,15 +64,31 @@ public class ListItemAdapter extends ArrayAdapter {
         labelView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(goTo);
+                if (goTo != null) {
+                    context.startActivity(goTo);
+                } else {
+                    final ArtifactInfoFragment artifactInfo = new ArtifactInfoFragment();
+
+                    Bundle b = new Bundle();
+                    b.putString("poi", "Terror Bird");
+                    artifactInfo.setArguments(b);
+                    if (context instanceof FragmentActivity) {
+                        Log.i("ListItemAdapter", "context is FragmentActivity");
+                        // We can get the fragment manager
+                        FragmentActivity activity = (FragmentActivity) context;
+                        activity.getSupportFragmentManager()
+                                .beginTransaction()
+                                .add(R.id.architect_view, artifactInfo)
+                                .addToBackStack(null)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                    }
+                }
             }
         });
         return convertView;
     }
 
     public Intent getGoTo(String label, ImageView imageView) {
-
-
         switch (label) {
             case "SCAN ARTIFACTS":
                 imageView.setImageResource(R.drawable.smallmenu3);
@@ -97,8 +115,8 @@ public class ListItemAdapter extends ArrayAdapter {
                 imageView.setImageResource(R.drawable.smallmenu9);
                 return new Intent(context, DonateActivity.class);
             default:
-                imageView.setImageResource(R.drawable.filledstar);
-                return new Intent(context, MenuActivity.class);
+                imageView.setImageResource(R.drawable.filledstarsmall);
+                return null;
         }
     }
 }
