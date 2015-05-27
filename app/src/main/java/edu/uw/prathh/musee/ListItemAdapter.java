@@ -97,7 +97,7 @@ public class ListItemAdapter extends ArrayAdapter {
                 imageView.setImageResource(R.drawable.smallmenu9);
                 return new Intent(context, DonateActivity.class);
             default:
-                imageView.setImageResource(R.drawable.filledstar);
+                imageView.setImageResource(R.drawable.filledstarsmall);
                 return new Intent(context, MenuActivity.class);
         }
     }
