@@ -7,7 +7,7 @@
         android:layout_height="fill_parent"
         android:orientation="horizontal"
         tools:context="edu.uw.prathh.musee.media.GalleryFragment"
-        android:background="#ffffffff"
+        android:background="#D8D8D8"
         android:id="@+id/layout">
 
         <!--<LinearLayout-->
