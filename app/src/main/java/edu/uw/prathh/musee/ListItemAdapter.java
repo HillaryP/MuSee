@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -103,7 +104,10 @@ public class ListItemAdapter extends ArrayAdapter {
                 imageView.setImageResource(R.drawable.smallmenu9);
                 return new Intent(context, DonateActivity.class);
             default:
-                imageView.setImageResource(R.drawable.filledstarsmall);
+                imageView.setImageResource(R.drawable.filledstarnew);
+//                LayoutParams params=imageView.getLayoutParams();
+//                params.width=newOne;
+//                view_instance.setLayoutParams(params);
                 return null;
         }
     }
