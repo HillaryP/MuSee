@@ -91,8 +91,8 @@ public class GalleryFragment extends Fragment {
                                 description.setPadding(20,10,10,30);
                                 first.setImageBitmap(bmp);
                                 comment.setGravity(Gravity.TOP);
-                                comment.setTextColor(Color.parseColor("#FF5238"));
-                                description.setTextColor(Color.parseColor("#FF5238"));
+                                comment.setTextColor(Color.parseColor("#3E4753"));
+                                description.setTextColor(Color.parseColor("#3E4753"));
                                 comment.setBackgroundColor(Color.parseColor("#D8D8D8"));
                                 description.setBackgroundColor(Color.parseColor("#D8D8D8"));
                                 first.setBackgroundColor(Color.parseColor("#3E4653"));

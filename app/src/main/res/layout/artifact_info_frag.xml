@@ -18,14 +18,17 @@
         <!--android:layout_alignParentRight="true"-->
     <!--/>-->
 
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:background="#3E4653"
+        android:id="@+id/topbanner"
         android:paddingBottom="5dp"
         android:layout_weight="2.3"
         android:gravity="left">
+
 
         <ImageButton
             android:layout_width="26dp"
@@ -36,18 +39,27 @@
             android:maxHeight="26dp"
             android:maxWidth="26dp"
             android:layout_marginBottom="9dp"
+            android:layout_marginRight="5dp"
             android:layout_marginLeft="15dp"
             android:layout_gravity="bottom" />
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="YAYYYY"
             android:textSize="17pt"
             android:textColor="#FF5237"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
+            android:paddingRight="20dp"
+            android:paddingTop="80dp"
             android:id="@+id/title"
             android:textStyle="bold"
             android:gravity="bottom|center_horizontal" />
+        </HorizontalScrollView>
+
 
     </LinearLayout>
 
