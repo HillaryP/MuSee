@@ -138,7 +138,7 @@ public class ArtifactInfoFragment extends Fragment {
                 if (getActivity() instanceof CameraActivity) {
                     ((CameraActivity) getActivity()).openGallery(artifactId);
                 } else if (getActivity() instanceof FavoritesActivity) {
-                    ((FavoritesActivity) getActivity()).addFavorite(favorite, poiData);
+                    ((FavoritesActivity) getActivity()).openGallery(artifactId);
                 }
             }
         });
