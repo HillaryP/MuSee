@@ -147,12 +147,18 @@ public class ArtifactInfoFragment extends Fragment {
         LinearLayout shareBox = (LinearLayout) rootView.findViewById(R.id.gridview).findViewById(R.id.share);
         shareBox.setBackgroundColor(Color.parseColor("#E0E0E0"));
         ((ImageView) shareBox.findViewById(R.id.imageView)).setImageResource(R.drawable.share);
-        ((TextView) shareBox.findViewById(R.id.name)).setText("Share:");
-        ((TextView) shareBox.findViewById(R.id.sub_text)).setText("");
         shareBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO - make something happen
+                try {
+                    Intent share = new Intent(Intent.ACTION_SEND);
+                    share.setType("image/jpeg"); // might be text, sound, whatever
+                    share.putExtra(Intent.EXTRA_TEXT, "Test");
+                    startActivity(Intent.createChooser(share, "share"));
+                    Log.i("ArtifactInfoFragment", "Success in getting past Facebook code!");
+                } catch (Exception e) {
+                    Log.e("ArtifactInfoFragment", "Error trying to get image: " + e.getLocalizedMessage());
+                }
             }
         });
 
