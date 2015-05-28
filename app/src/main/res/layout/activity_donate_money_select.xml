@@ -158,16 +158,15 @@
             android:layout_gravity="center_horizontal"
             android:onClick="addNumber"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/backspace"
+            android:layout_width="35dp"
+            android:layout_height="25dp"
+            android:padding="40dp"
+            android:layout_marginBottom="30dp"
             android:scaleType="fitCenter"
             android:id="@+id/backspace"
-            android:background="@null"
+            android:background="@drawable/backspace"
             android:adjustViewBounds="true"
-            android:maxHeight="27dp"
-            android:maxWidth="30dp"
-            android:layout_gravity="center_vertical|top"
+            android:layout_gravity="center"
             android:onClick="addNumber"/>
         </GridLayout>
     <ImageButton
