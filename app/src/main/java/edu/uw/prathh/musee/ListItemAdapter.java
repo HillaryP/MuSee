@@ -51,7 +51,7 @@ public class ListItemAdapter extends ArrayAdapter {
         ImageView imageView = (ImageView) convertView.findViewById(R.id.image);
 
         MenuListItem item = (MenuListItem) getItem( position );
-        String label = item.getLabel();
+        final String label = item.getLabel();
         TextView labelView = (TextView) convertView.findViewById(R.id.label);
         labelView.setText(label);
         labelView.setTextColor(Color.parseColor("#FF5337"));
@@ -67,20 +67,8 @@ public class ListItemAdapter extends ArrayAdapter {
                 if (goTo != null) {
                     context.startActivity(goTo);
                 } else {
-                    final ArtifactInfoFragment artifactInfo = new ArtifactInfoFragment();
-
-                    Bundle b = new Bundle();
-                    b.putString("poi", "Terror Bird");
-                    artifactInfo.setArguments(b);
                     if (context instanceof FragmentActivity) {
-                        Log.i("ListItemAdapter", "context is FragmentActivity");
-                        // We can get the fragment manager
-                        FragmentActivity activity = (FragmentActivity) context;
-                        activity.getSupportFragmentManager()
-                                .beginTransaction()
-                                .add(R.id.architect_view, artifactInfo)
-                                .addToBackStack(null)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                        ((FavoritesActivity) context).goToInfo(label);
                     }
                 }
             }

@@ -33,6 +33,7 @@ import java.util.List;
 import edu.uw.prathh.musee.MuSeeApp;
 import edu.uw.prathh.musee.R;
 import edu.uw.prathh.musee.camera.CameraActivity;
+import edu.uw.prathh.musee.info.FavoritesActivity;
 
 /**
  * Information fragment for artifact-specific information
@@ -81,7 +82,11 @@ public class ArtifactInfoFragment extends Fragment {
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CameraActivity) getActivity()).addFavorite(favorite, poiData);
+                if (getActivity() instanceof CameraActivity) {
+                    ((CameraActivity) getActivity()).addFavorite(favorite, poiData);
+                } else if (getActivity() instanceof FavoritesActivity) {
+                    ((FavoritesActivity) getActivity()).addFavorite(favorite, poiData);
+                }
             }
         });
 
@@ -130,7 +135,11 @@ public class ArtifactInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.i("CameraActivity", "ID: " + artifactId);
-                ((CameraActivity) getActivity()).openGallery(artifactId);
+                if (getActivity() instanceof CameraActivity) {
+                    ((CameraActivity) getActivity()).openGallery(artifactId);
+                } else if (getActivity() instanceof FavoritesActivity) {
+                    ((FavoritesActivity) getActivity()).addFavorite(favorite, poiData);
+                }
             }
         });
 
