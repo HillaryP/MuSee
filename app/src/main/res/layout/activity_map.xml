@@ -23,17 +23,21 @@
             android:layout_marginRight="-10dp"
             android:id="@+id/floor1"
             android:layout_gravity="left"
-            android:paddingLeft="42dp"
-            android:paddingRight="42dp"
+            android:textStyle="bold"
+            android:paddingLeft="45dp"
+            android:paddingRight="45dp"
+            android:textAllCaps="false"
             android:text="Lower Floor"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/floor2"
+            android:textStyle="bold"
             android:layout_margin="0dp"
             android:layout_gravity="right"
-            android:paddingLeft="42dp"
-            android:paddingRight="42dp"
+            android:paddingLeft="45dp"
+            android:textAllCaps="false"
+            android:paddingRight="45dp"
             android:text="Upper Floor"/>
 
     </LinearLayout>
