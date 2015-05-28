@@ -11,26 +11,34 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
 
 public class DonateMoneySelect extends Activity {
+    private TextView amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate_money_select);
-        final EditText title = (EditText) findViewById(R.id.amount);
-        title.setHint("$ _ _._ _");
+        TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
+        title.setText("Select Amount");
+        amount = (TextView) findViewById(R.id.amount);
+        amount.setText("$ _ _._ _");
         final ImageButton confirm = (ImageButton) findViewById(R.id.next);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle extras = new Bundle();
-                extras.putDouble("amt", Double.parseDouble(title.getText().toString()));
-                Intent confirmed = new Intent(DonateMoneySelect.this, DonationPaymentInfoActivity.class);
-                confirmed.putExtras(extras);
-                startActivity(confirmed);
+                String text = amount.getText().toString();
+                if (!text.equals("$ _ _._ _")) {
+                    Bundle extras = new Bundle();
+                    extras.putDouble("amt", Double.parseDouble(text.substring(1)));
+                    Intent confirmed = new Intent(DonateMoneySelect.this, DonationPaymentInfoActivity.class);
+                    confirmed.putExtras(extras);
+                    startActivity(confirmed);
+                }
             }
         });
 
@@ -42,6 +50,31 @@ public class DonateMoneySelect extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void addNumber(View v) {
+        String text = amount.getText().toString();
+        if (v.getId() == R.id.backspace) { // backspace pressed
+            if (!text.equals("$ _ _._ _")) {
+                amount.setText(text.substring(0, text.length() - 1));
+                if (amount.getText().toString().equals("$")) {
+                    amount.setText("$ _ _._ _");
+                }
+            }
+        } else if (v.getId() == R.id.number10) { // decimal pressed - only add if not there
+            if (!text.contains(".")) {
+                amount.setText(amount.getText() + ".");
+            }
+        } else { // number pressed - only add if not already two cents
+            Button currentClickedValue = (Button) v;
+            if (text.equals("$ _ _._ _")) {
+                amount.setText("$" + currentClickedValue.getText());
+            } else {
+                if (!text.contains(".") || text.indexOf(".") >= text.length() - 2) {
+                    amount.setText(amount.getText() + "" + currentClickedValue.getText());
+                }
+            }
+        }
     }
 
 
