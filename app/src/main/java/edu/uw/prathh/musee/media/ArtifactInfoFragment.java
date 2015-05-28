@@ -151,10 +151,11 @@ public class ArtifactInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent share = new Intent(Intent.ACTION_SEND);
-                    share.setType("image/jpeg"); // might be text, sound, whatever
-                    share.putExtra(Intent.EXTRA_TEXT, "Test");
-                    startActivity(Intent.createChooser(share, "share"));
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "I'm exploring the Burke Museum with MuSee!");
+                    sendIntent.setType("text/plain");
+                    startActivity(Intent.createChooser(sendIntent, "Share artifact with..."));
                     Log.i("ArtifactInfoFragment", "Success in getting past Facebook code!");
                 } catch (Exception e) {
                     Log.e("ArtifactInfoFragment", "Error trying to get image: " + e.getLocalizedMessage());
