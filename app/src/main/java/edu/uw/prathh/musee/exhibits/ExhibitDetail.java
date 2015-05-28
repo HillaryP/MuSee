@@ -55,9 +55,10 @@ public class ExhibitDetail extends Activity {
         queryEvent.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> exhibitDes, ParseException e) {
-                //String exDesc = exhibitDes.getString("description");
-                //TextView description = (TextView) findViewById(R.id.header).findViewById(R.id.description);
-                //Log.i("Exhibit Description", exDesc);
+                String exDesc = exhibitDes.get(0).getString("description");
+                TextView description = (TextView) findViewById(R.id.header).findViewById(R.id.description);
+                description.setText(exDesc);
+                Log.i("Exhibit Description", exDesc);
             }
         });
 
