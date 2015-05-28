@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.jsoup.Connection;
@@ -67,6 +68,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView ( final int groupPosition, final int childPosition,
             boolean isLastChild, View convertView, ViewGroup parent ) {
+
         final String text = (String) getChild(groupPosition, childPosition);
         LayoutInflater inflater = context.getLayoutInflater();
         if (convertView == null) {
@@ -149,6 +151,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String[] info = ((String) getGroup(groupPosition)).split(":::");
         String eventName = "";
+
         //String url = "";
         if (info.length > 1) {
             eventName = info[0];
@@ -157,13 +160,22 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.group_item, null);
+
         }
         TextView item = (TextView) convertView.findViewById(R.id.event);
         item.setText(eventName);
 
         //this.img = (ImageView) convertView.findViewById(R.id.event_img);
-        //new BitmapRequestTask().execute(url); //TODO - CONSIDER CHANGING ICON FOR EACH EVENT TYPE?
-
+        //new BitmapRequestTask().execute(url);
+        LinearLayout eventLayout = (LinearLayout) convertView.findViewById(R.id.oneevent);
+        String eventType = item.getText().toString();
+        if(eventType.toLowerCase().contains("pub")){
+            eventLayout.setBackgroundResource(R.drawable.burke9);
+        } else if (eventType.toLowerCase().contains("free")) {
+            eventLayout.setBackgroundResource(R.drawable.burke10);
+        } else if(eventType.toLowerCase().contains("earth")) {
+            eventLayout.setBackgroundResource(R.drawable.burke8);
+        }
         return convertView;
     }
 
