@@ -6,7 +6,9 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
@@ -75,8 +77,6 @@ public class CameraActivity extends FragmentActivity implements
         if ( this.urlListener !=null ) {
             this.architectView.registerUrlListener( this.getUrlListener() );
         }
-
-        Toast.makeText(this, "Move your phone around to scan artifacts!", Toast.LENGTH_LONG);
     }
 
     @Override
@@ -160,6 +160,17 @@ public class CameraActivity extends FragmentActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    public void setMenuButton() {
+        ImageButton button = (ImageButton) findViewById(R.id.menu_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CameraActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     /*============================Location Connection/update methods===========================*/
 
     protected synchronized void buildGoogleApiClient() {
@@ -233,9 +244,6 @@ public class CameraActivity extends FragmentActivity implements
                     b.putString("poi", invokedUri.getQueryParameter("title").toString());
                     artifactInfo.setArguments(b);
 
-            //TODO   Need to add functionality to add button back to camera view
-//                    ImageButton button = (ImageButton) findViewById (R.id.menu_button);
-//                    button.setVisibility(View.GONE);
                     getSupportFragmentManager()
                             .beginTransaction()
                             .add(R.id.architect_view, artifactInfo)

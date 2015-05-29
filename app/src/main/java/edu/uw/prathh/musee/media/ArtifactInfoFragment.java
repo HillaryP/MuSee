@@ -30,6 +30,7 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
+import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.MuSeeApp;
 import edu.uw.prathh.musee.R;
 import edu.uw.prathh.musee.camera.CameraActivity;
@@ -67,6 +68,25 @@ public class ArtifactInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.artifact_info_frag, container, false);
+        ImageButton button;
+        if (getActivity() instanceof CameraActivity) {
+            button = (ImageButton) getActivity().findViewById(R.id.menu_button);
+        } else {
+            button = (ImageButton) rootView.findViewById(R.id.back_to_fave);
+            button.setVisibility(View.VISIBLE);
+        }
+        button.setBackgroundResource(R.drawable.backbutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() instanceof CameraActivity) {
+                    ImageButton button = (ImageButton) getActivity().findViewById(R.id.menu_button);
+                    button.setBackgroundResource(R.drawable.menu1other);
+                    ((CameraActivity) getActivity()).setMenuButton();
+                }
+                getFragmentManager().popBackStack();
+            }
+        });
 
         TextView title = (TextView) rootView.findViewById(R.id.title);
         title.setText(this.poiData);

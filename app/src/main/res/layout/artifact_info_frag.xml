@@ -19,6 +19,12 @@
     <!--/>-->
 
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/back_to_fave"
+        android:visibility="gone" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
