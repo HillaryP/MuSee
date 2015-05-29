@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +77,15 @@ public class ArtifactInfoFragment extends Fragment {
             button.setVisibility(View.VISIBLE);
         }
         button.setBackgroundResource(R.drawable.backbutton);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(80,70);
+        params.setMargins(50, 80, 0, 0);
+        button.setLayoutParams(params);
+
+
+//        button.setLayoutParams(new RelativeLayout.LayoutParams(50,60));
+//        button.setPadding(10,20,10,20);
+       // button.setP(left,top,right,bottom)
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
