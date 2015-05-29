@@ -81,17 +81,15 @@ public class ArtifactInfoFragment extends Fragment {
         params.setMargins(50, 80, 0, 0);
         button.setLayoutParams(params);
 
-
-//        button.setLayoutParams(new RelativeLayout.LayoutParams(50,60));
-//        button.setPadding(10,20,10,20);
-       // button.setP(left,top,right,bottom)
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getActivity() instanceof CameraActivity) {
                     ImageButton button = (ImageButton) getActivity().findViewById(R.id.menu_button);
                     button.setBackgroundResource(R.drawable.menu1other);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(170,170);
+                    params.setMargins(30, 40, 0, 0);
+                    button.setLayoutParams(params);
                     ((CameraActivity) getActivity()).setMenuButton();
                 }
                 getFragmentManager().popBackStack();
