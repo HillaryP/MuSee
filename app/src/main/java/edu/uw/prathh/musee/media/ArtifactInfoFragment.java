@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -77,9 +78,9 @@ public class ArtifactInfoFragment extends Fragment {
             button.setVisibility(View.VISIBLE);
         }
         button.setBackgroundResource(R.drawable.backbutton);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(80,70);
-        params.setMargins(50, 80, 0, 0);
-        button.setLayoutParams(params);
+        button.getLayoutParams().height = 70;
+        button.getLayoutParams().width = 80;
+        button.setPadding(20,20,0,0);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,9 +88,8 @@ public class ArtifactInfoFragment extends Fragment {
                 if (getActivity() instanceof CameraActivity) {
                     ImageButton button = (ImageButton) getActivity().findViewById(R.id.menu_button);
                     button.setBackgroundResource(R.drawable.menu1other);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(170,170);
-                    params.setMargins(30, 40, 0, 0);
-                    button.setLayoutParams(params);
+                    button.getLayoutParams().height = 170;
+                    button.getLayoutParams().width = 170;
                     ((CameraActivity) getActivity()).setMenuButton();
                 }
                 getFragmentManager().popBackStack();
