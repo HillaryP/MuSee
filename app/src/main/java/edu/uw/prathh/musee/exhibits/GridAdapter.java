@@ -82,6 +82,9 @@ public class GridAdapter extends BaseAdapter {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             TextView textView = (TextView) view.findViewById(R.id.exhibit_name_text);
             textView.setText(exhibits[position]);
+
+
+
         } else {
             view = convertView;
         }

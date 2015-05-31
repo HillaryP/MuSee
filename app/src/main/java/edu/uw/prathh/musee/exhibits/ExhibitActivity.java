@@ -77,14 +77,14 @@ public class ExhibitActivity extends Activity {
         List<ParseObject> descriptions;
         ParseQuery<ParseObject> query = new ParseQuery<>("Exhibits");
         query.orderByDescending("name");
-        try {
-            descriptions = query.find();
-            String[] descriptionArray = new String[descriptions.size()];
-            int index = 0;
-            for (ParseObject description : descriptions) {
-                descriptionArray[index] = description.getString("description");
-                index++;
-            }
+            try {
+                descriptions = query.find();
+                String[] descriptionArray = new String[descriptions.size()];
+                int index = 0;
+                for (ParseObject description : descriptions) {
+                    descriptionArray[index] = description.getString("description");
+                    index++;
+                }
             return descriptionArray[position];
         } catch (ParseException e) {
             Log.e("Error", e.getMessage());

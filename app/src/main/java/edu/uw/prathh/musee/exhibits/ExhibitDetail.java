@@ -14,13 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import java.util.List;
 
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
@@ -50,9 +43,6 @@ public class ExhibitDetail extends Activity {
         title.setText(exhibitName);
         TextView description = (TextView) findViewById(R.id.description);
         description.setText(exDesc);
-
-
-
 
     }
 
