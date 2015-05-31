@@ -45,22 +45,14 @@ public class ExhibitDetail extends Activity {
         Bundle bundle = getIntent().getExtras();
 
         String exhibitName = bundle.getString("Exhibit");
-
-     //   Log.i("Exhibit Detail", exhibitName);
+        String exDesc = bundle.getString("Description");
 
         title.setText(exhibitName);
+        TextView description = (TextView) findViewById(R.id.description);
+        description.setText(exDesc);
 
-        ParseQuery<ParseObject> queryEvent = ParseQuery.getQuery("Exhibits");
-        queryEvent.whereEqualTo("name", exhibitName);
-        queryEvent.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> exhibitDes, ParseException e) {
-                String exDesc = exhibitDes.get(0).getString("description");
-                TextView description = (TextView) findViewById(R.id.header).findViewById(R.id.description);
-                description.setText(exDesc);
-                Log.i("Exhibit Description", exDesc);
-            }
-        });
+
+
 
     }
 

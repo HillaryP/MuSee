@@ -51,14 +51,17 @@ public class ExhibitActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String exhibitName = (String)gridview.getItemAtPosition(position);
+               String exhibitName = (String)gridview.getItemAtPosition(position);
+               String exhibitDescription = getDescription(position);
+               Log.i("Exhibit Activity", exhibitDescription);
               //  Log.i("Exhibit Activity", gridview.toString());
               //  Log.i("Exhibit Activity", exhibitName);
-                Bundle bundle = new Bundle();
-                bundle.putString("Exhibit", exhibitName);
-                Intent intent = new Intent(ExhibitActivity.this, ExhibitDetail.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+               Bundle bundle = new Bundle();
+               bundle.putString("Exhibit", exhibitName);
+               bundle.putString("Description", exhibitDescription);
+               Intent intent = new Intent(ExhibitActivity.this, ExhibitDetail.class);
+               intent.putExtras(bundle);
+               startActivity(intent);
             }
         });
     }
@@ -68,6 +71,26 @@ public class ExhibitActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_exhibit, menu);
         return true;
+    }
+
+    public String getDescription(int position) {
+        List<ParseObject> descriptions;
+        ParseQuery<ParseObject> query = new ParseQuery<>("Exhibits");
+        query.orderByDescending("name");
+        try {
+            descriptions = query.find();
+            String[] descriptionArray = new String[descriptions.size()];
+            int index = 0;
+            for (ParseObject description : descriptions) {
+                descriptionArray[index] = description.getString("description");
+                index++;
+            }
+            return descriptionArray[position];
+        } catch (ParseException e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

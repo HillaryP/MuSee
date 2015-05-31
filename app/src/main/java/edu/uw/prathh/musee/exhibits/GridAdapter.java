@@ -1,6 +1,7 @@
 package edu.uw.prathh.musee.exhibits;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class GridAdapter extends BaseAdapter {
     public GridAdapter(Context c) {
         mContext = c;
         exhibits = getExhibits();
+
     }
 
     private String[] getExhibits() {
@@ -53,14 +55,16 @@ public class GridAdapter extends BaseAdapter {
         return null;
     }
 
+
+
     public int getCount() {
         return exhibits.length;
     }
 
     public Object getItem(int position) {
         return exhibits[position];
-
     }
+
 
     public long getItemId(int position) {
         return 0;

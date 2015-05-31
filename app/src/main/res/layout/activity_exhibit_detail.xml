@@ -2,14 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.uw.prathh.musee.exhibits.ExhibitDetail">
+
+    tools:context="edu.uw.prathh.musee.exhibits.ExhibitDetail"
+    android:weightSum="1">
     <include layout="@layout/header_layout"
         android:id="@+id/header" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="276dp"
+        android:layout_height="152dp"
+        android:layout_gravity="center_horizontal"
         android:text="New Text"
         android:id="@+id/description"
-        android:layout_gravity="center_horizontal" />
+        android:textSize="14dp"
+        android:textColor="#1A2638"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:layout_weight="0.61" />
 </LinearLayout>
