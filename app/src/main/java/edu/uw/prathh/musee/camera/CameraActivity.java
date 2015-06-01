@@ -6,16 +6,15 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
@@ -162,6 +161,10 @@ public class CameraActivity extends FragmentActivity implements
 
     public void setMenuButton() {
         ImageButton button = (ImageButton) findViewById(R.id.menu_button);
+        float density = getResources().getDisplayMetrics().density;
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (54 * density), (int) (54 * density));
+        params.setMargins((int) (13 * density), (int) (13 * density), 0, 0);
+        button.setLayoutParams(params);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

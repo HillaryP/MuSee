@@ -23,7 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/back_to_fave"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="0dp" />
 
     <LinearLayout
         android:orientation="horizontal"
