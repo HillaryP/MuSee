@@ -12,12 +12,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-
-import com.wikitude.architect.ArchitectView;
-import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
 
 import edu.uw.prathh.musee.media.ArtifactInfoFragment;
 import edu.uw.prathh.musee.MenuActivity;
@@ -30,6 +26,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.wikitude.architect.ArchitectView;
+import com.wikitude.architect.StartupConfiguration;
 
 public class CameraActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -56,7 +54,7 @@ public class CameraActivity extends FragmentActivity implements
         createLocationRequest();
 
         this.architectView = (ArchitectView) findViewById(R.id.architect_view);
-        final ArchitectView.ArchitectConfig config = new ArchitectView.ArchitectConfig(license);
+        final StartupConfiguration config = new StartupConfiguration( this.license, ArchitectView.getSupportedFeaturesForDevice(this));
         try {
             this.architectView.onCreate(config);
         } catch (Exception e) {
@@ -232,8 +230,8 @@ public class CameraActivity extends FragmentActivity implements
 
     /* ================================Wikitude specific methods=================================*/
 
-    public ArchitectUrlListener getUrlListener() {
-        return new ArchitectUrlListener() {
+    public ArchitectView.ArchitectUrlListener getUrlListener() {
+        return new ArchitectView.ArchitectUrlListener() {
             @Override
             public boolean urlWasInvoked(String uriString) {
                 Uri invokedUri = Uri.parse(uriString);
