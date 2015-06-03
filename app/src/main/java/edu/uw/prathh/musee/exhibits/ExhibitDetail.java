@@ -48,6 +48,23 @@ public class ExhibitDetail extends Activity {
         TextView description = (TextView) findViewById(R.id.description);
         description.setText(exDesc);
 
+        ImageView view = (ImageView) findViewById(R.id.exhibitimage1);
+        ImageView view2 = (ImageView) findViewById(R.id.exhibitimage2);
+        String exhibitTitle = title.getText().toString();
+        if(exhibitTitle.toLowerCase().contains("evolution")){
+            view.setImageResource(R.drawable.evolution2);
+            view2.setImageResource(R.drawable.evolution1);
+        } else if(exhibitTitle.toLowerCase().contains("life")) {
+            view.setImageResource(R.drawable.evolution3);
+            view2.setImageResource(R.drawable.evolution4);
+        } else if(exhibitTitle.toLowerCase().contains("pacific")) {
+            view.setImageResource(R.drawable.exhibitpacific);
+            view2.setImageResource(R.drawable.exhibitpacific2);
+        } else if(exhibitTitle.toLowerCase().contains("garden")) {
+            view.setImageResource(R.drawable.exhibitgarden);
+            view2.setImageResource(R.drawable.exhibitgarden2);
+        }
+
         // attempted to randomly generate images
 //        Drawable[] b = {getResources().getDrawable(R.drawable.evolution1), getResources().getDrawable(R.drawable.evolution2),
 //                getResources().getDrawable(R.drawable.evolution3), getResources().getDrawable(R.drawable.evolution4)};

@@ -36,6 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/exhibitimage1"
+                android:layout_marginBottom="0dp"
+                android:paddingBottom="0dp"
                 android:src="@drawable/evolution1"
             />
 
@@ -50,6 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/exhibitimage2"
+                android:layout_marginBottom="0dp"
+                android:paddingBottom="0dp"
                 android:src="@drawable/evolution2"
 
                 />
