@@ -42,7 +42,19 @@ var World = {
             zOrder: 0
         });
 
-        var htmlDrawable = new AR.HtmlDrawable({
+        var label = new AR.Label(name, 0.1, {
+            offsetX: -0.15,
+            offsetY: -0.12,
+            zOrder : 1,
+            onClick : function() {
+                document.location = "architectsdk://markerselected?title=" + name;
+            },
+            style: {
+                textColor: "#FFFFFF"
+            }
+        });
+
+        /*var htmlDrawable = new AR.HtmlDrawable({
             uri: "assets/pin.html"
         }, 0.3, {
             offsetX: -0.15,
@@ -52,6 +64,7 @@ var World = {
                 document.location = "architectsdk://markerselected?title=" + name;
             },
         });
+        htmlDrawable.html.getElementById("title").innerHTML = name.replace("_", " ");*/
 
         /*
             The last line combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target and the drawable that should augment the recognized image.
@@ -59,7 +72,7 @@ var World = {
         */
         var pageOne = new AR.Trackable2DObject(this.tracker, name, {
             drawables: {
-                cam: [ overlayOne, htmlDrawable ]
+                cam: [ overlayOne, label ]
             }
         });
     },
