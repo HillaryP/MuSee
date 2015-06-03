@@ -242,7 +242,7 @@ public class CameraActivity extends FragmentActivity implements
                     final ArtifactInfoFragment artifactInfo = new ArtifactInfoFragment();
 
                     Bundle b = new Bundle();
-                    b.putString("poi", invokedUri.getQueryParameter("title").toString());
+                    b.putString("poi", invokedUri.getQueryParameter("title").replace("_", " ").trim());
                     artifactInfo.setArguments(b);
 
                     getSupportFragmentManager()

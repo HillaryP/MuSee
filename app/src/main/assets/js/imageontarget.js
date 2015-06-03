@@ -27,45 +27,41 @@ var World = {
 		/*
 			The next step is to create the augmentation. In this example an image resource is created and passed to the AR.ImageDrawable. A drawable is a visual component that can be connected to an IR target (AR.Trackable2DObject) or a geolocated object (AR.GeoObject). The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
 		*/
-		/* Create overlay for page one */
-		this.imgOne = new AR.ImageResource("assets/marker_idle.png");
-		var overlayOne = new AR.ImageDrawable(this.imgOne, 0.3, {
-			offsetX: -0.15,
-			offsetY: -0.15,
-			zOrder: 0
-		});
+		var poiData = myJsonData;
+		for (var targets = 0; targets < poiData.length; targets++) {
+    		this.createDroplet(poiData[targets].name);
+    	}
+	},
 
-		var htmlDrawable = new AR.HtmlDrawable({
-		    uri: "assets/pin.html"
-		}, 0.3, {
-		    offsetX: -0.15,
-		    offsetY: -0.15,
+    createDroplet: function createDropletFn(name) {
+        /* Create overlay for page one */
+        this.imgOne = new AR.ImageResource("assets/marker_idle.png");
+        var overlayOne = new AR.ImageDrawable(this.imgOne, 0.3, {
+            offsetX: -0.15,
+            offsetY: -0.15,
+            zOrder: 0
+        });
+
+        var htmlDrawable = new AR.HtmlDrawable({
+            uri: "assets/pin.html"
+        }, 0.3, {
+            offsetX: -0.15,
+            offsetY: -0.15,
             zOrder : 1,
             onClick : function() {
-                document.location = "architectsdk://markerselected?title=Terror Bird";
+                document.location = "architectsdk://markerselected?title=" + name;
             },
         });
 
-		/*
-			The last line combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target and the drawable that should augment the recognized image.
-			Please note that in this case the target name is a wildcard. Wildcards can be used to respond to any target defined in the target collection. If you want to respond to a certain target only for a particular AR.Trackable2DObject simply provide the target name as specified in the target collection.
-		*/
-		var pageOne = new AR.Trackable2DObject(this.tracker, "*", {
-			drawables: {
-				cam: [ overlayOne, htmlDrawable ]
-			}
-		});
-	},
-
-	// fired when user pressed maker in cam
-    onMarkerSelected: function onMarkerSelectedFn(size, options) {
         /*
-            As the button should be clickable the onClick trigger is defined in the options passed to the AR.ImageDrawable. In general each drawable can be made clickable by defining its onClick trigger. The function assigned to the click trigger calls AR.context.openInBrowser with the specified URL, which opens the URL in the browser.
+            The last line combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target and the drawable that should augment the recognized image.
+            Please note that in this case the target name is a wildcard. Wildcards can be used to respond to any target defined in the target collection. If you want to respond to a certain target only for a particular AR.Trackable2DObject simply provide the target name as specified in the target collection.
         */
-        options.onClick = function() {
-            document.location = "architectsdk://markerselected?title=Terror Bird";
-        };
-        return new AR.ImageDrawable(this.imgOne, size, options);
+        var pageOne = new AR.Trackable2DObject(this.tracker, name, {
+            drawables: {
+                cam: [ overlayOne, htmlDrawable ]
+            }
+        });
     },
 
 	worldLoaded: function worldLoadedFn() {
