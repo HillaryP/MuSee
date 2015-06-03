@@ -3,6 +3,8 @@ package edu.uw.prathh.musee.exhibits;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import java.util.Random;
 
 import edu.uw.prathh.musee.MenuActivity;
 import edu.uw.prathh.musee.R;
@@ -43,6 +47,27 @@ public class ExhibitDetail extends Activity {
         title.setText(exhibitName);
         TextView description = (TextView) findViewById(R.id.description);
         description.setText(exDesc);
+
+        // attempted to randomly generate images
+//        Drawable[] b = {getResources().getDrawable(R.drawable.evolution1), getResources().getDrawable(R.drawable.evolution2),
+//                getResources().getDrawable(R.drawable.evolution3), getResources().getDrawable(R.drawable.evolution4)};
+//        Random r = new Random();
+//        ImageView view = (ImageView) findViewById(R.id.exhibitimage1);
+//        ImageView view2 = (ImageView) findViewById(R.id.exhibitimage2);
+//
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+//            view.setBackgroundResource(r.nextInt(b.length));
+//            view2.setBackgroundResource(r.nextInt(b.length));
+////            view.setBackground(getResources().getDrawable(r.nextInt(b.length)));
+////            view2.setBackground(getResources().getDrawable(r.nextInt(b.length)));
+//        }
+//        else{
+//            view.setBackground(getResources().getDrawable(r.nextInt(b.length)));
+//            view2.setBackground(getResources().getDrawable(r.nextInt(b.length)));
+////            view.setBackgroundDrawable(getResources().getDrawable(r.nextInt(b.length)));
+////            view2.setBackgroundDrawable(getResources().getDrawable(r.nextInt(b.length)));
+//        }
+
 
     }
 

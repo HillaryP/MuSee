@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    android:background="#ffe6e6e6"
     tools:context="edu.uw.prathh.musee.exhibits.ExhibitDetail"
     android:weightSum="1">
     <include layout="@layout/header_layout"
@@ -10,14 +10,51 @@
 
     <TextView
         android:layout_width="276dp"
-        android:layout_height="152dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="New Text"
         android:id="@+id/description"
         android:textSize="14dp"
         android:textColor="#1A2638"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
         android:paddingTop="15dp"
-        android:layout_weight="0.61" />
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.7"
+        android:background="#ffe6e6e6"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="2">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/exhibitimage1"
+                android:src="@drawable/evolution1"
+            />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/exhibitimage2"
+                android:src="@drawable/evolution2"
+
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
 </LinearLayout>
