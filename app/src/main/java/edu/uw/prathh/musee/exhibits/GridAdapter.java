@@ -78,10 +78,23 @@ public class GridAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.grid_layout, null);
             ImageView imageView = (ImageView) view.findViewById(R.id.exhibit_name_image);
-            imageView.setImageResource(R.drawable.photos);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             TextView textView = (TextView) view.findViewById(R.id.exhibit_name_text);
             textView.setText(exhibits[position]);
+
+            String exhibitType = textView.getText().toString();
+            if(exhibitType.toLowerCase().contains("evolution")){
+                imageView.setBackgroundResource(R.drawable.exhibit2);
+            } else if(exhibitType.toLowerCase().contains("life")) {
+                imageView.setBackgroundResource(R.drawable.exhibit6);
+            } else if(exhibitType.toLowerCase().contains("garden")) {
+                imageView.setBackgroundResource(R.drawable.exhibit5);
+            }  else if(exhibitType.toLowerCase().contains("pacific")) {
+               imageView.setBackgroundResource(R.drawable.exhibit4);
+            }
+
+
+//            imageView.setImageResource(R.drawable.photos);
+//            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
 
