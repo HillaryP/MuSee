@@ -79,6 +79,8 @@
         android:text="Loading description..."
         android:id="@+id/description"
         android:layout_weight="1.8"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:gravity="center_vertical|center_horizontal"
         android:background="#fff" />
 
