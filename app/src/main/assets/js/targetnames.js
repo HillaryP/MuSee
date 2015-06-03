@@ -1,23 +1,29 @@
 var myJsonData = [{
 	"name": "Terror_Bird"
 }, {
-    "name": "Lily"
-}, {
-    "name": "Oscar"
-}, {
-    "name": "Hillary"
-}, {
-    "name": "Laura"
-}, {
     "name": "MuSee"
 }, {
-    "name": "T_Rex_Tooth"
+    "name": "Tyrannosaurus_Rex_Tooth"
 }, {
-    "name": "Other_Tooth"
+    "name": "Tyrannosaurus_Rex_Tooth_"
 }, {
-    "name": "Tooth"
+    "name": "Hadrosaur_Tooth"
+}, {
+    "name": "Hadrosaur_Tooth_"
+}, {
+    "name": "_Hadrosaur_Tooth_"
+}, {
+    "name": "Albertosaurus_Claw"
+}, {
+    "name": "Albertosaurus_Claw_"
 }, {
     "name": "Canoe"
 }, {
-    "name": "*"
+    "name": "Canoe_"
+}, {
+    "name": "Kwakawaka'Wakw_House"
+}, {
+    "name": "Kwakawaka'Wakw_House_"
+}, {
+    "name": "_Kwakawaka'Wakw_House_"
 }];

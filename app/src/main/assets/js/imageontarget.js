@@ -20,7 +20,7 @@ var World = {
 			Important: If you replace the tracker file with your own, make sure to change the target name accordingly.
 			Use a specific target name to respond only to a certain target or use a wildcard to respond to any or a certain group of targets.
 		*/
-		this.tracker = new AR.ClientTracker("assets/burke.wtc", {
+		this.tracker = new AR.ClientTracker("assets/burke_final.wtc", {
 			onLoaded: this.worldLoaded
 		});
 
@@ -42,12 +42,12 @@ var World = {
             zOrder: 0
         });
 
-        var label = new AR.Label(name, 0.1, {
+        var label = new AR.Label(name.replace(/_/g, ' ').trim(), 0.1, {
             offsetX: -0.15,
             offsetY: -0.12,
             zOrder : 1,
             onClick : function() {
-                document.location = "architectsdk://markerselected?title=" + name;
+                document.location = "architectsdk://markerselected?title=" + name.replace(/_/g, ' ').trim();
             },
             style: {
                 textColor: "#FFFFFF"
