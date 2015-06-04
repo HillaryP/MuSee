@@ -74,7 +74,7 @@ public class GalleryFragment extends Fragment {
                             public void done(byte[] bytes, ParseException e) {
                                 ImageView first = new ImageView(rootView.getContext());
                                 first.setLayoutParams(new ViewGroup.LayoutParams(900, 800));
-                                first.setScaleType(ImageView.ScaleType.FIT_XY);
+//                                first.setScaleType(ImageView.ScaleType.FIT_XY);
                                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
                                 LinearLayout layoutOne = new LinearLayout(rootView.getContext());
@@ -95,7 +95,6 @@ public class GalleryFragment extends Fragment {
                                 description.setTextColor(Color.parseColor("#3E4753"));
                                 comment.setBackgroundColor(Color.parseColor("#D8D8D8"));
                                 description.setBackgroundColor(Color.parseColor("#D8D8D8"));
-                                first.setBackgroundColor(Color.parseColor("#3E4653"));
                                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 layoutParams.setMargins(10,300,10,150);
 
