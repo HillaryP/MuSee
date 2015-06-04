@@ -67,6 +67,7 @@ public class ListItemAdapter extends ArrayAdapter {
             public void onClick(View v) {
                 if (goTo != null) {
                     context.startActivity(goTo);
+                    ((Activity) context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 } else {
                     if (context instanceof FragmentActivity) {
                         ((FavoritesActivity) context).goToInfo(label);

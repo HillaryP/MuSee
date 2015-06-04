@@ -67,6 +67,7 @@ public class CameraActivity extends FragmentActivity implements
             public void onClick(View v) {
                 Intent intent = new Intent(CameraActivity.this, MenuActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
             }
         });
 
@@ -182,6 +183,7 @@ public class CameraActivity extends FragmentActivity implements
             public void onClick(View v) {
                 Intent intent = new Intent(CameraActivity.this, MenuActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
             }
         });
     }

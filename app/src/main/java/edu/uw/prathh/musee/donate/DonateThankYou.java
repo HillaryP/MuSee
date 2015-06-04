@@ -27,6 +27,7 @@ public class DonateThankYou extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(DonateThankYou.this, MenuActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
             }
         });
     }
