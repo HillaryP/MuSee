@@ -9,7 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,8 +53,31 @@ public class FavoritesActivity extends FragmentActivity {
         for (String favorite : ((MuSeeApp) getApplication()).getFavorites()) {
             menuItems.add(new MenuListItem(favorite));
         }
-        ListView listView = (ListView) findViewById(R.id.list_view);
-        listView.setAdapter(new ListItemAdapter(this, R.layout.list_item, menuItems));
+        if (menuItems.size() == 0) {
+            FrameLayout rl = (FrameLayout) findViewById(R.id.content);
+            LinearLayout linearLayout = new LinearLayout(this);
+            linearLayout.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            linearLayout.setPadding(0, 300, 0, 0);
+            TextView text = new TextView(this);
+            text.setText("It looks like there's nothing here! Here's how to add a favorite:");
+            text.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            linearLayout.addView(text);
+            ImageView image = new ImageView(this);
+            image.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            image.setImageResource(R.drawable.photos);
+            linearLayout.addView(image);
+            rl.addView(linearLayout);
+        } else {
+            ListView listView = (ListView) findViewById(R.id.list_view);
+            listView.setAdapter(new ListItemAdapter(this, R.layout.list_item, menuItems));
+        }
     }
 
 
