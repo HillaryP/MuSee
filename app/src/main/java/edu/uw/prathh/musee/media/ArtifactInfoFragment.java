@@ -46,7 +46,7 @@ public class ArtifactInfoFragment extends Fragment {
     String artifactId;
     String url;
     String audioUrl;
-    static MediaPlayer mediaPlayer; //TODO - This should not be static
+    MediaPlayer mediaPlayer;
 
     public ArtifactInfoFragment() {
     }
@@ -139,11 +139,12 @@ public class ArtifactInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
+                    DialogFragment newFragment = new MediaPauseDialogFragment();
+                    ((MediaPauseDialogFragment) newFragment).setMediaPlayer(mediaPlayer);
+                    newFragment.show(getFragmentManager(), "media");
                     String url = audioUrl;
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     mediaPlayer.setDataSource(url);
-                    DialogFragment newFragment = new MediaPauseDialogFragment();
-                    newFragment.show(getFragmentManager(), "media");
                     mediaPlayer.prepare();
                     mediaPlayer.start();
                 } catch (Exception e) {
@@ -202,8 +203,7 @@ public class ArtifactInfoFragment extends Fragment {
         return rootView;
     }
 
-        /*===============================Helper methods to populate media==========================*/
-
+    /*===============================Helper methods to populate media==========================*/
     private void setUp(final View rootView) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Artifacts");
         query.whereEqualTo("name", this.poiData);
@@ -271,21 +271,5 @@ public class ArtifactInfoFragment extends Fragment {
                 }
             }
         });
-    }
-
-    public static class MediaPauseDialogFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Currently playing audio")
-                    .setPositiveButton("Stop", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            mediaPlayer.stop();
-                        }
-                    });
-            // Create the AlertDialog object and return it
-            return builder.create();
-        }
     }
 }
