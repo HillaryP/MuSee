@@ -47,6 +47,7 @@ public class ArtifactInfoFragment extends Fragment {
     String url;
     String audioUrl;
     MediaPlayer mediaPlayer;
+    String audioShowName;
 
     public ArtifactInfoFragment() {
     }
@@ -140,7 +141,7 @@ public class ArtifactInfoFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     DialogFragment newFragment = new MediaPauseDialogFragment();
-                    ((MediaPauseDialogFragment) newFragment).setMediaPlayer(mediaPlayer);
+                    ((MediaPauseDialogFragment) newFragment).setMediaPlayer(mediaPlayer, audioShowName);
                     newFragment.show(getFragmentManager(), "media");
                     String url = audioUrl;
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -237,8 +238,10 @@ public class ArtifactInfoFragment extends Fragment {
                         String audioName = information.get(0).getString("music_name");
                         if (audioName == null || audioName.length() == 0) {
                             ((TextView) musicBox.findViewById(R.id.name)).setText("Audio");
+                            audioShowName = "Audio";
                         } else {
                             ((TextView) musicBox.findViewById(R.id.name)).setText(audioName);
+                            audioShowName = audioName;
                         }
                         String audioArtist = information.get(0).getString("music_artist");
                         if (audioArtist == null || audioArtist.length() == 0) {
