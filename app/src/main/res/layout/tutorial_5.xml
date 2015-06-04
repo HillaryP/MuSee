@@ -34,6 +34,7 @@
             android:lineSpacingExtra="5dp"/>
 
         <ImageView
+            android:id="@+id/camera"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="250dp"

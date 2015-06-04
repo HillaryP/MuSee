@@ -158,6 +158,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.uw.prathh.musee.donate.DonateActivity" />
         </activity>
+        <!--<activity-->
+            <!--android:name=".TutorialSwipe"-->
+            <!--android:label="TutorialSwipe"-->
+            <!--android:parentActivityName="edu.uw.prathh.musee.TutorialSwipe" >-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="edu.uw.prathh.musee.MenuActivity" />-->
+        <!--</activity>-->
+        <activity
+            android:name=".ScreenSlidePageActivity"
+            android:label="ScreenSlidePageActivity"
+            android:parentActivityName=".ScreenSlidePageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.prathh.musee.ScreenSlidePageActivity" />
+        </activity>
     </application>
 
 </manifest>
