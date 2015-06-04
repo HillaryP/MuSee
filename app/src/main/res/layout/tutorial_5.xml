@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="135dp"
             android:layout_centerHorizontal="true"
             android:text="Click below to start using the camera view to scan artifacts."
             android:textColor="#FFFFFF"
@@ -37,7 +37,7 @@
             android:id="@+id/camera"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="255dp"
             android:src="@drawable/getstarted"
             android:onClick="startCamera"/>
     </RelativeLayout>
