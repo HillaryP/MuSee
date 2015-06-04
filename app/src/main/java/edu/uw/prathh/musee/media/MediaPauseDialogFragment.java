@@ -7,12 +7,12 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
+import edu.uw.prathh.musee.MuSeeApp;
+
 public class MediaPauseDialogFragment extends DialogFragment {
-    MediaPlayer mediaPlayer;
     String s;
 
-    public void setMediaPlayer(MediaPlayer mediaPlayer, String s) {
-        this.mediaPlayer = mediaPlayer;
+    public void setMediaPlayer(String s) {
         this.s = s;
     }
 
@@ -23,7 +23,8 @@ public class MediaPauseDialogFragment extends DialogFragment {
         builder.setMessage("Currently playing \"" + s + "\"")
                 .setPositiveButton("Stop", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mediaPlayer.stop();
+                        ((MuSeeApp) getActivity().getApplication()).mediaPlayer.stop();
+                        ((MuSeeApp) getActivity().getApplication()).mediaPlayer.reset();
                     }
                 });
         // Create the AlertDialog object and return it

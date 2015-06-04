@@ -63,7 +63,7 @@ public class ArtifactInfoFragment extends Fragment {
         if (getArguments() != null) {
             Log.i("ArtifactInfoFragment", "PoiData: " + getArguments().getString("poi"));
             this.poiData = getArguments().getString("poi");
-            mediaPlayer = new MediaPlayer();
+            mediaPlayer = ((MuSeeApp) getActivity().getApplication()).mediaPlayer;
         }
     }
 
@@ -141,10 +141,9 @@ public class ArtifactInfoFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     DialogFragment newFragment = new MediaPauseDialogFragment();
-                    ((MediaPauseDialogFragment) newFragment).setMediaPlayer(mediaPlayer, audioShowName);
+                    ((MediaPauseDialogFragment) newFragment).setMediaPlayer(audioShowName);
                     newFragment.show(getFragmentManager(), "media");
                     String url = audioUrl;
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     mediaPlayer.setDataSource(url);
                     mediaPlayer.prepare();
                     mediaPlayer.start();

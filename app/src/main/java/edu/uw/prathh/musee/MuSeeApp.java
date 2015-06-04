@@ -2,6 +2,8 @@ package edu.uw.prathh.musee;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -16,11 +18,14 @@ import java.util.Set;
 public class MuSeeApp extends Application {
     public static final String PREFS_NAME = "MyPrefs";
     private SharedPreferences prefs;
+    public MediaPlayer mediaPlayer;
 
     @Override
     public void onCreate() {
         super.onCreate();
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/Avenir.ttc");
+        this.mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // Enable Local Datastore.
