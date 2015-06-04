@@ -77,12 +77,20 @@ public class FavoritesActivity extends FragmentActivity {
     }
 
     public void goToInfo(String label) {
-        String[] parts = label.split(" ");
-        String fixedFormatString = "";
-        for (int i = 0; i < parts.length; i++) {
-            String first = "" + parts[i].charAt(0);
-            fixedFormatString += " " + first.toUpperCase() + parts[i].substring(1).toLowerCase();
+        String fixedFormatString;
+        if (label.equalsIgnoreCase("musee"))  {
+            fixedFormatString = "MuSee";
+        } else if (label.equalsIgnoreCase("Kwakawaka'Wakw House")) {
+            fixedFormatString = "Kwakawaka'Wakw House";
+        } else {
+            String[] parts = label.split(" ");
+            fixedFormatString = "";
+            for (int i = 0; i < parts.length; i++) {
+                String first = "" + parts[i].charAt(0);
+                fixedFormatString += " " + first.toUpperCase() + parts[i].substring(1).toLowerCase();
+            }
         }
+
         final ArtifactInfoFragment artifactInfo = new ArtifactInfoFragment();
 
         Bundle b = new Bundle();
