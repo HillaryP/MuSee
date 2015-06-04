@@ -95,17 +95,32 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private void addEvent(View v, int groupPosition) {
         String[] items = ((String) getChild(groupPosition, 0)).split("\n");
-        String[] time = items[2].split(" ");
+        String noNonNumbers = items[2].replaceAll("\\D+", " ");
         Calendar startDate = convertToDate(items[0]);
+        Log.i("Events", "Time: " + noNonNumbers);
+        String[] time = noNonNumbers.split(" ");
+        int firstHour = 0;
+        int firstMinute = 0;
+        int secondHour = 0;
+        int secondMinute = 0;
+        if (time.length == 2) {
+            firstHour = Integer.parseInt(time[0]);
+            secondHour = Integer.parseInt(time[1]);
+        } else {
+            firstHour = Integer.parseInt(time[0]);
+            firstMinute = Integer.parseInt(time[1]);
+            secondHour = Integer.parseInt(time[2]);
+            secondMinute = Integer.parseInt(time[3]);
+        }
 
         Calendar beginTime = Calendar.getInstance();
         beginTime.set(startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DAY_OF_MONTH),
-                Integer.parseInt(time[0].split(":")[0]),
-                Integer.parseInt(time[0].split(":")[1]));
+                firstHour,
+                firstMinute);
         Calendar endTime = Calendar.getInstance();
         endTime.set(startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DAY_OF_MONTH),
-                Integer.parseInt(time[2].split(":")[0]),
-                Integer.parseInt(time[2].split(":")[1].substring(0, time[2].split(":")[1].length() - 2)));
+                secondHour,
+                secondMinute);
 
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
