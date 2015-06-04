@@ -73,7 +73,7 @@ public class GalleryFragment extends Fragment {
                             @Override
                             public void done(byte[] bytes, ParseException e) {
                                 ImageView first = new ImageView(rootView.getContext());
-                                first.setLayoutParams(new ViewGroup.LayoutParams(600, 600));
+                                first.setLayoutParams(new ViewGroup.LayoutParams(400, 400));
                                 first.setScaleType(ImageView.ScaleType.FIT_XY);
                                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
@@ -85,6 +85,8 @@ public class GalleryFragment extends Fragment {
                                 description.setText(parseDescription);
                                 comment.setTextSize(20);
                                 description.setTextSize(13);
+                                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(350, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                description.setLayoutParams(layoutParams2);
 
                                 first.setPadding(0, 0, 0, 0);
                                 comment.setPadding(20,30,10,10);
