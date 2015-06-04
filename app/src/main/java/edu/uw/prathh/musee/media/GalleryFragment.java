@@ -85,12 +85,13 @@ public class GalleryFragment extends Fragment {
                                 description.setText(parseDescription);
                                 comment.setTextSize(20);
                                 description.setTextSize(13);
-                                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(350, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(390, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 description.setLayoutParams(layoutParams2);
 
                                 first.setPadding(0, 0, 0, 0);
                                 comment.setPadding(20,30,10,10);
                                 description.setPadding(20,10,10,30);
+
                                 first.setImageBitmap(bmp);
                                 comment.setGravity(Gravity.TOP);
                                 comment.setTextColor(Color.parseColor("#3E4753"));
@@ -98,7 +99,8 @@ public class GalleryFragment extends Fragment {
                                 comment.setBackgroundColor(Color.parseColor("#D8D8D8"));
                                 description.setBackgroundColor(Color.parseColor("#D8D8D8"));
                                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                                layoutParams.setMargins(10,300,10,150);
+                                layoutParams.setMargins(10,150,10,150);
+
 
                                 layoutOne.setLayoutParams(layoutParams);
                                 layoutOne.setPadding(0,0,0,0);
