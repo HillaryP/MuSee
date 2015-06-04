@@ -99,7 +99,7 @@ public class GalleryFragment extends Fragment {
                                 comment.setBackgroundColor(Color.parseColor("#D8D8D8"));
                                 description.setBackgroundColor(Color.parseColor("#D8D8D8"));
                                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                                layoutParams.setMargins(10,150,10,150);
+                                layoutParams.setMargins(10,150,10,0);
 
 
                                 layoutOne.setLayoutParams(layoutParams);
