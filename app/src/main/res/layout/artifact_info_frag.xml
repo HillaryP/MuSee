@@ -63,7 +63,7 @@
             android:textColor="#FF5237"
             android:layout_marginLeft="5dp"
             android:paddingRight="20dp"
-            android:paddingTop="70dp"
+            android:paddingTop="75dp"
             android:id="@+id/title"
             android:textStyle="bold"
             android:gravity="bottom|center_horizontal" />
