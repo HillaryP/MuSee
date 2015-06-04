@@ -42,39 +42,53 @@ var World = {
             zOrder: 0
         });
 
-        var label = new AR.Label(name.replace(/_/g, ' ').trim(), 0.1, {
-            offsetX: -0.15,
-            offsetY: -0.12,
-            zOrder : 1,
-            onClick : function() {
-                document.location = "architectsdk://markerselected?title=" + name.replace(/_/g, ' ').trim();
-            },
-            style: {
-                textColor: "#FFFFFF"
-            }
-        });
+        var trimmed = name.replace(/_/g, ' ').trim();
+        if (trimmed.length < 8) {
+            var label = new AR.Label(name.replace(/_/g, ' ').trim(), 0.1, {
+                offsetX: -0.15,
+                offsetY: -0.12,
+                zOrder : 1,
+                onClick : function() {
+                    document.location = "architectsdk://markerselected?title=" + name.replace(/_/g, ' ').trim();
+                },
+                style: {
+                    textColor: "#FFFFFF"
+                }
+            });
 
-        /*var htmlDrawable = new AR.HtmlDrawable({
-            uri: "assets/pin.html"
-        }, 0.3, {
-            offsetX: -0.15,
-            offsetY: -0.15,
-            zOrder : 1,
-            onClick : function() {
-                document.location = "architectsdk://markerselected?title=" + name;
-            },
-        });
-        htmlDrawable.html.getElementById("title").innerHTML = name.replace("_", " ");*/
+            /*
+                The last line combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target and the drawable that should augment the recognized image.
+                Please note that in this case the target name is a wildcard. Wildcards can be used to respond to any target defined in the target collection. If you want to respond to a certain target only for a particular AR.Trackable2DObject simply provide the target name as specified in the target collection.
+            */
+            var pageOne = new AR.Trackable2DObject(this.tracker, name, {
+                drawables: {
+                    cam: [ overlayOne, label ]
+                }
+            });
+        } else {
+            var labelString1 = trimmed.substring(0, 8);
+            var label1 = new AR.Label(labelString1 + "...", 0.1, {
+                offsetX: -0.15,
+                offsetY: -0.12,
+                zOrder : 1,
+                onClick : function() {
+                    document.location = "architectsdk://markerselected?title=" + name.replace(/_/g, ' ').trim();
+                },
+                style: {
+                    textColor: "#FFFFFF"
+                }
+            });
 
-        /*
-            The last line combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target and the drawable that should augment the recognized image.
-            Please note that in this case the target name is a wildcard. Wildcards can be used to respond to any target defined in the target collection. If you want to respond to a certain target only for a particular AR.Trackable2DObject simply provide the target name as specified in the target collection.
-        */
-        var pageOne = new AR.Trackable2DObject(this.tracker, name, {
-            drawables: {
-                cam: [ overlayOne, label ]
-            }
-        });
+            /*
+                The last line combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target and the drawable that should augment the recognized image.
+                Please note that in this case the target name is a wildcard. Wildcards can be used to respond to any target defined in the target collection. If you want to respond to a certain target only for a particular AR.Trackable2DObject simply provide the target name as specified in the target collection.
+            */
+            var pageOne = new AR.Trackable2DObject(this.tracker, name, {
+                drawables: {
+                    cam: [ overlayOne, label1 ]
+                }
+            });
+        }
     },
 
 	worldLoaded: function worldLoadedFn() {
