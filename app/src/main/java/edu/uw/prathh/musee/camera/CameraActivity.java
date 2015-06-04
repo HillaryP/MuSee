@@ -77,6 +77,20 @@ public class CameraActivity extends FragmentActivity implements
     }
 
     @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+            ImageButton button = (ImageButton) findViewById(R.id.menu_button);
+            button.setBackgroundResource(R.drawable.menu1other);
+            button.getLayoutParams().height = 170;
+            button.getLayoutParams().width = 170;
+            setMenuButton();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public void onPostCreate(Bundle bundleSavedInstance) {
         super.onPostCreate(bundleSavedInstance);
         Log.i("CameraActivity", "onPostCreate Called");
