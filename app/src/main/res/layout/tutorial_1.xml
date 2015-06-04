@@ -8,8 +8,9 @@
     <ImageView
         android:layout_width="84dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="65dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="25dp"
+        android:layout_gravity="right"
         android:background="@drawable/skip"
         android:onClick="startCamera"/>
 
@@ -40,7 +41,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="Read, explore and learn more about artifacts."
