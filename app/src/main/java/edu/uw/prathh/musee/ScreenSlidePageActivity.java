@@ -1,5 +1,6 @@
 package edu.uw.prathh.musee;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -7,7 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.ViewParent;
+import android.view.View;
+
+import edu.uw.prathh.musee.camera.CameraActivity;
 
 /**
  * Created by owong on 6/3/15.
@@ -37,12 +40,21 @@ public class ScreenSlidePageActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ScreenSlidePageFragment();
+            ScreenSlidePageFragment f = new ScreenSlidePageFragment();
+            Bundle b = new Bundle();
+            b.putInt("position", position);
+            f.setArguments(b);
+            return f;
         }
 
         @Override
         public int getCount() {
             return NUM_PAGES;
         }
+    }
+
+    public void startCamera(View v) {
+        Intent startCamera = new Intent(this, CameraActivity.class);
+        startActivity(startCamera);
     }
 }
