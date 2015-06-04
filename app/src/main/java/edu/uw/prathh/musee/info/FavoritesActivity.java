@@ -64,7 +64,7 @@ public class FavoritesActivity extends FragmentActivity {
             linearLayout.setPadding(0, 300, 0, 0);
             TextView text = new TextView(this);
             text.setText("It looks like there's nothing here! Here's how to add a favorite:");
-            text.setPadding(50, 10, 0 , 5);
+            text.setPadding(50, 50, 15 , 5);
             text.setTextSize(20);
             text.setLayoutParams(new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,

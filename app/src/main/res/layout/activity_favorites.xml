@@ -3,7 +3,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="edu.uw.prathh.musee.info.FavoritesActivity"
-    android:id="@+id/content">
+    android:id="@+id/content"
+    android:background="#D8D8D8">
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
