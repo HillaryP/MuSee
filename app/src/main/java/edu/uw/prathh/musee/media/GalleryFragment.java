@@ -73,7 +73,7 @@ public class GalleryFragment extends Fragment {
                             @Override
                             public void done(byte[] bytes, ParseException e) {
                                 ImageView first = new ImageView(rootView.getContext());
-                                first.setLayoutParams(new ViewGroup.LayoutParams(900, 800));
+                                first.setLayoutParams(new ViewGroup.LayoutParams(600, 600));
 //                                first.setScaleType(ImageView.ScaleType.FIT_XY);
                                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
